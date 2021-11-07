@@ -1,35 +1,35 @@
-package com.example.mobileapp.activities.basket;
+package com.example.mobileapp.activities.scan;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-
+import com.budiyev.android.codescanner.CodeScanner;
+import com.budiyev.android.codescanner.CodeScannerView;
+import com.budiyev.android.codescanner.DecodeCallback;
 import com.example.mobileapp.MainActivity;
 import com.example.mobileapp.R;
+import com.example.mobileapp.activities.basket.BasketActivity;
 import com.example.mobileapp.activities.profile.ProfileActivity;
-import com.example.mobileapp.activities.scan.ScanActivity;
 import com.example.mobileapp.activities.search.SearchActivity;
 import com.example.mobileapp.activities.wishlist.WishlistActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.zxing.Result;
 
-public class BasketActivity extends AppCompatActivity {
+public class ScanActivity extends AppCompatActivity {
 
-    private Button scanButton;
+    private CodeScanner codeScanner;
     BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_basket);
-
-        //initialize and assign variable
+        setContentView(R.layout.activity_scan);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         //set home selected
         bottomNavigationView.setSelectedItemId(R.id.basket);
@@ -59,21 +59,40 @@ public class BasketActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.basket:
-
+                        startActivity(new Intent(getApplicationContext(), BasketActivity.class));
+                        overridePendingTransition(0,0);
                         return true;
                 }
                 return false;
             }
         });
+       CodeScannerView codeScannerView = findViewById(R.id.scanner_view);
+       codeScanner = new CodeScanner(this, codeScannerView);
+       codeScannerView.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               codeScanner.startPreview();
+           }
+       });
 
-        scanButton = findViewById(R.id.scanButton);
-        scanButton.setOnClickListener(view -> {
-            Intent intent = new Intent(this, ScanActivity.class);
-            startActivity(intent);
-        });
+       codeScanner.setDecodeCallback(new DecodeCallback() {
+           @Override
+           public void onDecoded(@NonNull Result result) {
+               runOnUiThread(new Runnable() {
+                   @Override
+                   public void run() {
+                       Toast.makeText(ScanActivity.this, result.getText(), Toast.LENGTH_LONG).show();
+                       Log.v("Tag", result.getText());
+
+                   }
+               });
+           }
+       });
     }
 
-    private void openScanActivity() {
-        startActivity(new Intent(getApplicationContext(), ScanActivity.class));
+    @Override
+    protected void onPause() {
+        codeScanner.releaseResources();
+        super.onPause();
     }
 }
