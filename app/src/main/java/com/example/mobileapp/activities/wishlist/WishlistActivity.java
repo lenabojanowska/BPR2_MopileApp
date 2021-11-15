@@ -58,7 +58,7 @@ public class WishlistActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.v("Tag", "Button Clicked");
 
-                GetRetrofitResponse();
+                wishlistViewModel.GetRetrofitResponse();
             }
         });
 
@@ -70,7 +70,7 @@ public class WishlistActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.v("Tag", "Post Button Clicked");
-                CallRetrofit();
+                wishlistViewModel.CallRetrofit(name.getText().toString(), username.getText().toString());
             }
         });
 
@@ -81,7 +81,7 @@ public class WishlistActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.v("Tag", "Delete Button Clicked");
-                DeleteRetrofitResponse();
+                wishlistViewModel.DeleteRetrofit(id.getText().toString());
             }
         });
 
@@ -121,85 +121,6 @@ public class WishlistActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-
-    }
-
-    private void DeleteRetrofitResponse() {
-        String idField = id.getText().toString();
-        WishlistApi wishlistApi = ServiceGenerator.getWishListApi();
-        Call<Void> call = wishlistApi.deleteWishlistById(Integer.parseInt(idField));
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                Log.v("Tag", "Deleted "+response.code());
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Log.v("Tag", t.toString());
-            }
-        });
-    }
-
-    private void CallRetrofit() {
-        String postName = name.getText().toString();
-        String postUsername = username.getText().toString();
-
-        WishlistApi wishlistApi = ServiceGenerator.getWishListApi();
-        WishlistModel wishlistModel = new WishlistModel(0, postName, postUsername);
-
-        Log.v("Tag", "Post");
-        Call<WishlistModel> call = wishlistApi.postWishlist(wishlistModel);
-
-        call.enqueue(new Callback<WishlistModel>() {
-            @Override
-            public void onResponse(Call<WishlistModel> call, Response<WishlistModel> response) {
-                Log.v("Tag", response.body().getName());
-            }
-
-            @Override
-            public void onFailure(Call<WishlistModel> call, Throwable t) {
-                Log.v("Tag", t.toString());
-            }
-        });
-
-    }
-
-    private void GetRetrofitResponse() {
-
-        WishlistApi wishlistApi = ServiceGenerator.getWishListApi();
-        Call<List<WishlistModel>> call = wishlistApi.getWishListSecond();
-        call.enqueue(new Callback<List<WishlistModel>>() {
-
-            @Override
-            public void onResponse(Call<List<WishlistModel>> call, Response<List<WishlistModel>> response) {
-                if(response.isSuccessful()){
-                    Log.v("Tag", "the response " + response.body().toString());
-
-                    List<WishlistModel> wishlists = response.body();
-
-                    for(WishlistModel wishlistModel: wishlists) {
-                        Log.v("Tag", "The List " + wishlistModel.getName());
-                    }
-                }
-                else {
-                    try {
-                        Log.v("Tag", "Error " + response.errorBody().string());
-                    } catch (IOException e){
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<WishlistModel>> call, Throwable t) {
-
-                Log.v("Tag", t.toString(),t.getCause());
-                t.getStackTrace();
-            }
-        });
-
     }
 
     //Observing any data changed

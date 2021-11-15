@@ -18,4 +18,16 @@ public class WishlistViewModel extends ViewModel {
     }
 
     public LiveData<List<WishlistModel>> getWishlists(){ return wishlistRepository.getWishlists(); }
+
+    public void GetRetrofitResponse(){
+        wishlistRepository.GetRetrofitResponse();
+    }
+
+    public void CallRetrofit(String n, String pn){
+        wishlistRepository.CallRetrofit(n, pn);
+    }
+
+    public void DeleteRetrofit(String id){
+        wishlistRepository.DeleteRetrofitResponse(id);
+    }
 }
