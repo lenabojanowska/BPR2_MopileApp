@@ -44,12 +44,16 @@ public class WishlistRepository {
             @Override
             public void onResponse(Call<List<WishlistModel>> call, Response<List<WishlistModel>> response) {
                 if(response.isSuccessful()){
-                    Log.v("Tag", "the response " + response.body().toString());
+                    Log.v("Tag", "--------//--------");
+                    Log.v("Tag", "Getting Wishlists");
+                    Log.v("Tag", "The Wishlist list:");
+                    //Log.v("Tag", "the response " + response.body().toString());
 
                     List<WishlistModel> wishlists = response.body();
 
                     for(WishlistModel wishlistModel: wishlists) {
-                        Log.v("Tag", "The List " + wishlistModel.getName());
+
+                        Log.v("Tag", "The Wishlist " + wishlistModel.getName());
                     }
                 }
                 else {
@@ -72,24 +76,24 @@ public class WishlistRepository {
     }
 
     public void CallRetrofit(String postName, String postUsername) {
-        //String postName = name.getText().toString();
-        //String postUsername = username.getText().toString();
 
         WishlistApi wishlistApi = ServiceGenerator.getWishListApi();
         WishlistModel wishlistModel = new WishlistModel(postName, postUsername);
 
-        Log.v("Tag", "Post");
         Call<WishlistModel> call = wishlistApi.postWishlist(wishlistModel);
 
         call.enqueue(new Callback<WishlistModel>() {
             @Override
             public void onResponse(Call<WishlistModel> call, Response<WishlistModel> response) {
-                Log.v("Tag", response.body().getName());
+                Log.v("Tag", "--------//--------");
+                Log.v("Tag", "Posting Wishlist");
+                Log.v("Tag", "The Wishlist posted");
+                Log.v("Tag", "The Wishlist " + response.body().getName());
+                GetRetrofitResponse();
             }
 
             @Override
-            public void onFailure(Call<WishlistModel> call, Throwable t) {
-                Log.v("Tag", t.toString());
+            public void onFailure(Call<WishlistModel> call, Throwable t) { Log.v("Tag", t.toString());
             }
         });
 
@@ -101,7 +105,11 @@ public class WishlistRepository {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                Log.v("Tag", "Deleted "+response.code());
+                Log.v("Tag", "--------//--------");
+                Log.v("Tag", "Deleting wishlist by id ");
+                Log.v("Tag", "Deleted " + response.code());
+                Log.v("Tag", "Deleted Wishlist with " + id + "id");
+                GetRetrofitResponse();
             }
 
             @Override
