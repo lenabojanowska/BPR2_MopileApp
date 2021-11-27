@@ -4,7 +4,7 @@ plugins {
 
 android {
     compileSdk 31
-    buildToolsVersion "30.0.1"
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -79,4 +79,5 @@ dependencies {
 
     //scanning camera
     implementation 'com.budiyev.android:code-scanner:2.1.0'
+
 }

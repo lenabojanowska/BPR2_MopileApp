@@ -15,28 +15,29 @@
         <activity
             android:name=".activities.profile.ProfileActivity"
             android:exported="false"
-            android:label="@string/title_activity_profile"
+            android:label="ProfileActivity"
             android:theme="@style/Theme.MobileApp.NoActionBar" />
         <activity
             android:name=".activities.basket.BasketActivity"
             android:exported="false"
-            android:label="@string/title_activity_profile"
+            android:label="BasketActivity"
             android:theme="@style/Theme.MobileApp.NoActionBar" />
         <activity
             android:name=".activities.search.SearchActivity"
             android:exported="false"
-            android:label="@string/title_activity_profile"
+            android:label="SearchActivity"
             android:theme="@style/Theme.MobileApp.NoActionBar" />
         <activity
             android:name=".activities.wishlist.WishlistActivity"
             android:exported="false"
-            android:label="@string/title_activity_profile"
+            android:label="WishlistActivity"
             android:theme="@style/Theme.MobileApp.NoActionBar" />
         <activity
             android:name=".activities.scan.ScanActivity"
             android:exported="false"
-            android:label="@string/title_activity_profile"
+            android:label="ScanActivity"
             android:theme="@style/Theme.MobileApp.NoActionBar" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

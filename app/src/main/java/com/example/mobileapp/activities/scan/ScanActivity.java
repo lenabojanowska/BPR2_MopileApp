@@ -24,12 +24,14 @@ import com.google.zxing.Result;
 
 public class ScanActivity extends AppCompatActivity {
 
+
     private CodeScanner codeScanner;
     BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
+
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         //set home selected
         bottomNavigationView.setSelectedItemId(R.id.basket);
@@ -62,32 +64,37 @@ public class ScanActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), BasketActivity.class));
                         overridePendingTransition(0,0);
                         return true;
+
+
                 }
                 return false;
             }
         });
-       CodeScannerView codeScannerView = findViewById(R.id.scanner_view);
-       codeScanner = new CodeScanner(this, codeScannerView);
-       codeScannerView.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               codeScanner.startPreview();
-           }
-       });
 
-       codeScanner.setDecodeCallback(new DecodeCallback() {
-           @Override
-           public void onDecoded(@NonNull Result result) {
-               runOnUiThread(new Runnable() {
-                   @Override
-                   public void run() {
-                       Toast.makeText(ScanActivity.this, result.getText(), Toast.LENGTH_LONG).show();
-                       Log.v("Tag", result.getText());
+        CodeScannerView codeScannerView = findViewById(R.id.scanner_view);
+        codeScanner = new CodeScanner(this, codeScannerView);
 
-                   }
-               });
-           }
-       });
+        codeScannerView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                codeScanner.startPreview();
+
+            }
+        });
+
+        codeScanner.setDecodeCallback(new DecodeCallback() {
+            @Override
+            public void onDecoded(@NonNull Result result) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(ScanActivity.this, result.getText(), Toast.LENGTH_LONG).show();
+                        Log.v("Tag", result.getText());
+                    }
+                });
+            }
+        });
     }
 
     @Override
