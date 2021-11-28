@@ -4,6 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,37 +15,33 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.mobileapp.MainActivity;
 import com.example.mobileapp.R;
 import com.example.mobileapp.activities.basket.BasketActivity;
 import com.example.mobileapp.activities.profile.ProfileActivity;
 import com.example.mobileapp.activities.search.SearchActivity;
-import com.example.mobileapp.connection.ServiceGenerator;
+import com.example.mobileapp.activities.wishlist.adapter.WishlistAdapter;
 import com.example.mobileapp.connection.apis.WishlistApi;
-import com.example.mobileapp.connection.responses.WishlistsResponse;
 import com.example.mobileapp.models.WishlistModel;
+import com.example.mobileapp.viewmodels.WishlistViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class WishlistActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
-    Button proofOfConceptButton;
-    Button postButton;
-    Button deleteButton;
-    EditText name, username, id;
+
     //ViewModel
     private WishlistViewModel wishlistViewModel;
     private WishlistApi wishlistApi;
+
+    private RecyclerView recyclerView;
+    private WishlistAdapter adapter;
+
+    private List<WishlistModel> wishlistList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,39 +50,25 @@ public class WishlistActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wishlist);
 
-        proofOfConceptButton = findViewById(R.id.proofButton);
+        recyclerView = (RecyclerView) findViewById(R.id.wishlistRecyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new WishlistAdapter(wishlistList, this);
+        recyclerView.setAdapter(adapter);
+        wishlistList = new ArrayList<>();
 
-        proofOfConceptButton.setOnClickListener(new View.OnClickListener() {
+        wishlistViewModel = ViewModelProviders.of(this).get(WishlistViewModel.class);
+        wishlistViewModel.getWishlistList().observe(this, new Observer<List<WishlistModel>>() {
             @Override
-            public void onClick(View view) {
-                Log.v("Tag", "Button Clicked");
-
-                wishlistViewModel.GetRetrofitResponse();
+            public void onChanged(List<WishlistModel> wishlistModels) {
+                if(wishlistModels != null){
+                    wishlistList = wishlistModels;
+                    adapter.setWishlistList(wishlistModels);
+                }
             }
         });
+        wishlistViewModel.GetRetrofitResponse();
 
-        name = findViewById(R.id.nameTextView);
-        username = findViewById(R.id.usernameTextView);
-        postButton = findViewById(R.id.postButton);
-
-        postButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.v("Tag", "Post Button Clicked");
-                wishlistViewModel.CallRetrofit(name.getText().toString(), username.getText().toString());
-            }
-        });
-
-        id = findViewById(R.id.idTextView);
-        deleteButton = findViewById(R.id.deleteButton);
-
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.v("Tag", "Delete Button Clicked");
-                wishlistViewModel.DeleteRetrofit(id.getText().toString());
-            }
-        });
 
         //initialize and assign variable
         bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -123,8 +108,11 @@ public class WishlistActivity extends AppCompatActivity {
         });
     }
 
+
+
+
     //Observing any data changed
-    private void ObserveAnyChange(){
+    /*private void ObserveAnyChange(){
         wishlistViewModel.getWishlists().observe(this, new Observer<List<WishlistModel>>() {
             @Override
             public void onChanged(List<WishlistModel> wishlistModels) {
@@ -132,5 +120,5 @@ public class WishlistActivity extends AppCompatActivity {
 
             }
         });
-    }
+    }*/
 }

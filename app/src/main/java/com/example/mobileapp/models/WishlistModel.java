@@ -18,11 +18,11 @@ public class WishlistModel {
         this.username = username;
     }
 
-    protected WishlistModel(Parcel in) {
-        id = in.readInt();
-        name = in.readString();
-        username = in.readString();
+    public WishlistModel(String name) {
+        this.name = name;
+
     }
+
 
     public long getId() {
         return id;

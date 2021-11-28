@@ -1,4 +1,4 @@
-package com.example.mobileapp.activities.wishlist;
+package com.example.mobileapp.viewmodels;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -13,21 +13,25 @@ public class WishlistViewModel extends ViewModel {
 
     private WishlistRepository wishlistRepository;
 
+   //MutableLiveData<List<WishlistModel>> postMutableLiveData = new MutableLiveData<>();
+
     public WishlistViewModel() {
         wishlistRepository = WishlistRepository.getInstance();
     }
 
-    public LiveData<List<WishlistModel>> getWishlists(){ return wishlistRepository.getWishlists(); }
+    public LiveData<List<WishlistModel>> getWishlistList(){
+        return wishlistRepository.getWishlistList();
+    }
 
     public void GetRetrofitResponse(){
-        wishlistRepository.GetRetrofitResponse();
+        wishlistRepository.GetWishlistList();
     }
 
-    public void CallRetrofit(String n, String pn){
-        wishlistRepository.CallRetrofit(n, pn);
+    public void CallRetrofit(String n, String un){
+        wishlistRepository.CallRetrofit(n, un);
     }
 
-    public void DeleteRetrofit(String id){
+   /* public void DeleteRetrofit(String id){
         wishlistRepository.DeleteRetrofitResponse(id);
-    }
+    }*/
 }

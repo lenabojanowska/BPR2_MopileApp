@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.mobileapp.connection.ServiceGenerator;
 import com.example.mobileapp.connection.apis.WishlistApi;
+import com.example.mobileapp.connection.responses.WishlistsResponse;
 import com.example.mobileapp.models.WishlistModel;
 
 import java.io.IOException;
@@ -20,7 +21,7 @@ public class WishlistRepository {
 
     private static WishlistRepository instance;
 
-    private MutableLiveData<List<WishlistModel>> mWishlists;
+    private final MutableLiveData<List<WishlistModel>> mWishlist;
 
     public static WishlistRepository getInstance(){
         if(instance == null) {
@@ -29,16 +30,18 @@ public class WishlistRepository {
         return instance;
     }
 
-    private WishlistRepository() {
-        mWishlists = new MutableLiveData<>();
+    public WishlistRepository() {
+        mWishlist = new MutableLiveData<>();
     }
 
-    public LiveData<List<WishlistModel>> getWishlists(){ return mWishlists; }
+    public LiveData<List<WishlistModel>> getWishlistList(){
+        return mWishlist;
+    }
 
-    public void GetRetrofitResponse() {
+    public void GetWishlistList() {
 
         WishlistApi wishlistApi = ServiceGenerator.getWishListApi();
-        Call<List<WishlistModel>> call = wishlistApi.getWishListSecond();
+        Call<List<WishlistModel>> call = wishlistApi.getWishList();
         call.enqueue(new Callback<List<WishlistModel>>() {
 
             @Override
@@ -49,15 +52,18 @@ public class WishlistRepository {
                     Log.v("Tag", "The Wishlist list:");
                     //Log.v("Tag", "the response " + response.body().toString());
 
-                    List<WishlistModel> wishlists = response.body();
+                    mWishlist.setValue(response.body());
+                    /*List<WishlistModel> wishlists = response.body();
 
                     for(WishlistModel wishlistModel: wishlists) {
 
+
                         Log.v("Tag", "The Wishlist " + wishlistModel.getName());
-                    }
+                    }*/
                 }
                 else {
                     try {
+                        mWishlist.postValue(null);
                         Log.v("Tag", "Error " + response.errorBody().string());
                     } catch (IOException e){
                         e.printStackTrace();
@@ -75,10 +81,10 @@ public class WishlistRepository {
 
     }
 
-    public void CallRetrofit(String postName, String postUsername) {
+    public void CallRetrofit(String postName, String userName) {
 
-        WishlistApi wishlistApi = ServiceGenerator.getWishListApi();
-        WishlistModel wishlistModel = new WishlistModel(postName, postUsername);
+       WishlistApi wishlistApi = ServiceGenerator.getWishListApi();
+        WishlistModel wishlistModel = new WishlistModel(postName, userName);
 
         Call<WishlistModel> call = wishlistApi.postWishlist(wishlistModel);
 
@@ -89,7 +95,7 @@ public class WishlistRepository {
                 Log.v("Tag", "Posting Wishlist");
                 Log.v("Tag", "The Wishlist posted");
                 Log.v("Tag", "The Wishlist " + response.body().getName());
-                GetRetrofitResponse();
+                GetWishlistList();
             }
 
             @Override
@@ -99,7 +105,7 @@ public class WishlistRepository {
 
     }
 
-    public void DeleteRetrofitResponse(String id) {
+    /*public void DeleteRetrofitResponse(String id) {
         WishlistApi wishlistApi = ServiceGenerator.getWishListApi();
         Call<Void> call = wishlistApi.deleteWishlistById(Integer.parseInt(id));
         call.enqueue(new Callback<Void>() {
@@ -117,6 +123,6 @@ public class WishlistRepository {
                 Log.v("Tag", t.toString());
             }
         });
-    }
+    }*/
 
 }

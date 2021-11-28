@@ -14,7 +14,7 @@ import retrofit2.http.Path;
 
 public interface WishlistApi {
     @GET("Wishlists")
-    Call<List<WishlistModel>> getWishListSecond();
+    Call<List<WishlistModel>> getWishList();
 
     @POST("Wishlists")
     Call<WishlistModel> postWishlist(@Body WishlistModel wishlistModel);
