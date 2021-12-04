@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 
 import com.example.mobileapp.MainActivity;
@@ -14,20 +13,22 @@ import com.example.mobileapp.R;
 import com.example.mobileapp.activities.profile.ProfileActivity;
 import com.example.mobileapp.activities.scan.ScanActivity;
 import com.example.mobileapp.activities.search.SearchActivity;
-import com.example.mobileapp.activities.wishlist.WishlistActivity;
+import com.example.mobileapp.activities.wishlist.WishlistsActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class BasketActivity extends AppCompatActivity {
 
     private Button scanButton;
     BottomNavigationView bottomNavigationView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basket);
+
+
 
         //initialize and assign variable
         bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -49,7 +50,7 @@ public class BasketActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.wishlist:
-                        startActivity(new Intent(getApplicationContext(), WishlistActivity.class));
+                        startActivity(new Intent(getApplicationContext(), WishlistsActivity.class));
                         overridePendingTransition(0,0);
                         return true;
 

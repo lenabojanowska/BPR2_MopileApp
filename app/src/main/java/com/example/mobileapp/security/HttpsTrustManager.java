@@ -1,4 +1,4 @@
-package com.example.mobileapp.sequrity;
+package com.example.mobileapp.security;
 
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;

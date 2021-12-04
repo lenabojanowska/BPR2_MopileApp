@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "747758950386",
+    "project_id": "shopping-app-bpr",
+    "storage_bucket": "shopping-app-bpr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:747758950386:android:8c0fd5ff3be86ceb34bd6b",
+        "android_client_info": {
+          "package_name": "com.example.mobileapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "747758950386-031i0kdmesu1utv4aui4ka6venm3lorv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mobileapp",
+            "certificate_hash": "61ffef8d2c185f6397d3a4d6cc446dad196c52d1"
+          }
+        },
+        {
+          "client_id": "747758950386-qfaa3etg8u19a1l7hiun2plcgfk7ks96.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB01jG7tg_egwybp7-yd6ecUDIU69dVWGk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "747758950386-qfaa3etg8u19a1l7hiun2plcgfk7ks96.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

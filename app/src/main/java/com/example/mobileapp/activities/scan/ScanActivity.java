@@ -18,7 +18,7 @@ import com.example.mobileapp.R;
 import com.example.mobileapp.activities.basket.BasketActivity;
 import com.example.mobileapp.activities.profile.ProfileActivity;
 import com.example.mobileapp.activities.search.SearchActivity;
-import com.example.mobileapp.activities.wishlist.WishlistActivity;
+import com.example.mobileapp.activities.wishlist.WishlistsActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.zxing.Result;
 
@@ -51,7 +51,7 @@ public class ScanActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.wishlist:
-                        startActivity(new Intent(getApplicationContext(), WishlistActivity.class));
+                        startActivity(new Intent(getApplicationContext(), WishlistsActivity.class));
                         overridePendingTransition(0,0);
                         return true;
 
