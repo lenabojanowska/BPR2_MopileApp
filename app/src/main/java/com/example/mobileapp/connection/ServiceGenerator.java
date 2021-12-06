@@ -1,5 +1,6 @@
 package com.example.mobileapp.connection;
 
+import com.example.mobileapp.connection.apis.ProductApi;
 import com.example.mobileapp.connection.apis.WishlistApi;
 
 import java.security.cert.CertificateException;
@@ -20,7 +21,7 @@ public class ServiceGenerator {
     private static OkHttpClient client = new OkHttpClient.Builder().build();
 
     private static Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
-            .baseUrl("https://10.0.2.2:5001/api/")
+            .baseUrl("https://172.20.10.2:5001/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(getUnsafeOkHttpClient()
                     .build());
@@ -29,7 +30,12 @@ public class ServiceGenerator {
 
     private static WishlistApi wishlistApi = retrofit.create(WishlistApi.class);
 
+    private static ProductApi productApi = retrofit.create(ProductApi.class);
+
     public static WishlistApi getWishListApi() { return wishlistApi; }
+
+    public static ProductApi getProductApi() { return productApi; }
+
 
     public static OkHttpClient.Builder getUnsafeOkHttpClient() {
         try {

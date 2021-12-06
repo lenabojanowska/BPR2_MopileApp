@@ -1,5 +1,7 @@
 package com.example.mobileapp.activities.wishlist;
 
+import static android.service.controls.ControlsProviderService.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -10,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.mobileapp.MainActivity;
@@ -22,6 +25,8 @@ import com.example.mobileapp.connection.apis.WishlistApi;
 import com.example.mobileapp.models.WishlistModel;
 import com.example.mobileapp.viewmodels.WishlistViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,12 +44,20 @@ public class WishlistsActivity extends AppCompatActivity implements WishlistAdap
 
     private List<WishlistModel> wishlistList;
 
+    private FirebaseAuth firebaseAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         wishlistViewModel = new ViewModelProvider(this).get(WishlistViewModel.class);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wishlists);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        String id = firebaseUser.getUid();
+
+        Log.d(TAG, "uid on Main Activity " + id);
 
         recyclerView = (RecyclerView) findViewById(R.id.wishlistRecyclerView);
         recyclerView.setHasFixedSize(true);
@@ -63,7 +76,9 @@ public class WishlistsActivity extends AppCompatActivity implements WishlistAdap
                 }
             }
         });
-        wishlistViewModel.GetRetrofitResponse();
+
+        wishlistViewModel.GetProductListByCategory(id);
+        //wishlistViewModel.GetRetrofitResponse();
 
 
         //initialize and assign variable
@@ -110,4 +125,22 @@ public class WishlistsActivity extends AppCompatActivity implements WishlistAdap
         Intent intent = new Intent(this, WishlistActivity.class);
         startActivity(intent);
     }
+
+    /*private void checkUser() {
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        if(firebaseUser == null){
+            startActivity(new Intent(this, WishlistActivity.class));
+            finish();
+            Log.d(TAG, "no firebase user on Wishlist Activity") ;
+        }else{
+            String email = firebaseUser.getProviderId();
+            String id = firebaseUser.getUid();
+            Log.d(TAG, "id provider on Main Activity " + email);
+            Log.d(TAG, "uid on Main Activity " + id);
+
+            wishlistViewModel.GetProductListByCategory(id);
+
+            //binding.emailTextView.setText(email);
+        }
+    }*/
 }

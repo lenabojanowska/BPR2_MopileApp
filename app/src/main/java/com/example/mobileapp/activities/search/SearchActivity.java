@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.mobileapp.MainActivity;
 import com.example.mobileapp.R;
 import com.example.mobileapp.activities.basket.BasketActivity;
+import com.example.mobileapp.activities.product.ProductsActivity;
 import com.example.mobileapp.activities.profile.ProfileActivity;
 import com.example.mobileapp.activities.wishlist.WishlistsActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -60,5 +63,23 @@ public class SearchActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    public void getDiaryProducts(View view) {
+
+        /*Intent intent = new Intent(this, ProductsActivity.class);
+        intent.putExtra("id", 2);
+        startActivity(intent);*/
+        Log.d("TAG", "dziala czyli cos innego sie zjebalo");
+
+    }
+
+    public void getSweetsProducts(View view) {
+
+        Intent intent = new Intent(this, BasketActivity.class);
+        //intent.putExtra("id", 3);
+        startActivity(intent);
+
+
     }
 }

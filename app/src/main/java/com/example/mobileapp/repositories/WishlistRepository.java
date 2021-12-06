@@ -38,6 +38,50 @@ public class WishlistRepository {
         return mWishlist;
     }
 
+    public void GetWishlistListByCustomerId(String profileId) {
+
+        WishlistApi wishlistApi = ServiceGenerator.getWishListApi();
+        Call<List<WishlistModel>> call = wishlistApi.getWishListsByCustomerID(profileId);
+        call.enqueue(new Callback<List<WishlistModel>>() {
+
+            @Override
+            public void onResponse(Call<List<WishlistModel>> call, Response<List<WishlistModel>> response) {
+                if(response.isSuccessful()){
+                    Log.v("Tag", "--------//--------");
+                    Log.v("Tag", "Getting Wishlists");
+                    Log.v("Tag", "The Wishlist list:");
+                    Log.v("Tag", "the response " + response.body().toString());
+
+                    mWishlist.setValue(response.body());
+                    Log.v("Tag", "loooool");
+                    /*List<WishlistModel> wishlists = response.body();
+
+                    for(WishlistModel wishlistModel: wishlists) {
+
+
+                        Log.v("Tag", "The Wishlist " + wishlistModel.getName());
+                    }*/
+                }
+                else {
+                    try {
+                        mWishlist.postValue(null);
+                        Log.v("Tag", "Error " + response.errorBody().string());
+                    } catch (IOException e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<WishlistModel>> call, Throwable t) {
+
+                Log.v("Tag", t.toString(),t.getCause());
+                t.getStackTrace();
+            }
+        });
+
+    }
+
     public void GetWishlistList() {
 
         WishlistApi wishlistApi = ServiceGenerator.getWishListApi();

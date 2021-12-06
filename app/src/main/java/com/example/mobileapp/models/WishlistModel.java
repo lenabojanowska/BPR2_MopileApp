@@ -11,18 +11,17 @@ public class WishlistModel {
 
     private String name;
 
-    private String username;
+    private String profileId;
 
-    public WishlistModel(String name, String username) {
+    public WishlistModel(String name, String profileId) {
         this.name = name;
-        this.username = username;
+        this.profileId = profileId;
     }
 
     public WishlistModel(String name) {
         this.name = name;
 
     }
-
 
     public long getId() {
         return id;
@@ -32,7 +31,7 @@ public class WishlistModel {
         return name;
     }
 
-    public String getUsername() {
-        return username;
+    public String getProfileId() {
+        return profileId;
     }
 }

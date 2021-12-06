@@ -23,6 +23,10 @@ public class WishlistViewModel extends ViewModel {
         return wishlistRepository.getWishlistList();
     }
 
+    public void GetProductListByCategory(String customerId){
+        wishlistRepository.GetWishlistListByCustomerId(customerId);
+    }
+
     public void GetRetrofitResponse(){
         wishlistRepository.GetWishlistList();
     }

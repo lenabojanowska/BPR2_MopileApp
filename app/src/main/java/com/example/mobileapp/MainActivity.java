@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        checkUser();
+        //checkUser();
 
         //initialize and assign variable
         bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void checkUser() {
+   /* private void checkUser() {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         if(firebaseUser == null){
             startActivity(new Intent(this, MainActivity.class));
@@ -81,5 +81,5 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "email on Main Activity " + email);
             //binding.emailTextView.setText(email);
         }
-    }
+    }*/
 }

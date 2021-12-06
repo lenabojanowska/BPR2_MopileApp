@@ -7,14 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".activities.basket.BasketActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Basket"
-        android:textSize="50sp" />
-
-    <Button
+    <!-- <Button
         android:id="@+id/scanButton"
         android:layout_width="113dp"
         android:layout_height="wrap_content"
@@ -23,8 +16,15 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="146dp"
         android:layout_marginEnd="150dp"
-        android:layout_marginBottom="222dp"
-        android:text="Scan" />
+        android:layout_marginBottom="84dp"
+        android:text="Scan" />-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/basketRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="535dp"></androidx.recyclerview.widget.RecyclerView>
+
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -36,5 +36,46 @@
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
         app:menu="@menu/menu_navigation" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="62dp"
+
+        android:layout_below="@+id/basketRecyclerView"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="21dp">
+
+        <TextView
+            android:layout_width="202dp"
+            android:layout_height="37dp"
+            android:layout_below="@+id/price_layout"
+            android:layout_alignBottom="@+id/basketRecyclerView"
+            android:layout_gravity="left"
+            android:layout_marginTop="-2dp"
+            android:layout_marginBottom="74dp"
+            android:text="Total Cost" />
+
+        <TextView
+            android:text="000"
+            android:id="@+id/finalPriceTextView"
+            android:layout_width="199dp"
+            android:layout_height="35dp"
+            android:layout_gravity="right" />
+
+
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/buyButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottom_navigation"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="13dp"
+        android:text="BUY"/>
+
 
 </RelativeLayout>

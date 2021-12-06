@@ -11,10 +11,14 @@ import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface WishlistApi {
     @GET("Wishlists")
     Call<List<WishlistModel>> getWishList();
+
+    @GET("customerWishLists")
+    Call<List<WishlistModel>> getWishListsByCustomerID(@Query("customerId") String profileId);
 
     @POST("Wishlists")
     Call<WishlistModel> postWishlist(@Body WishlistModel wishlistModel);

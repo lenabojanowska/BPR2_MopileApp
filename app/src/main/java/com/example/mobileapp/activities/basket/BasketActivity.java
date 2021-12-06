@@ -2,11 +2,13 @@ package com.example.mobileapp.activities.basket;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.mobileapp.MainActivity;
 import com.example.mobileapp.R;
@@ -20,6 +22,12 @@ public class BasketActivity extends AppCompatActivity {
 
     private Button scanButton;
     BottomNavigationView bottomNavigationView;
+
+    private Button buyButton;
+    private RecyclerView basketRecyclerView;
+    private TextView totalPriceTextView;
+
+
 
 
     @Override
@@ -67,11 +75,11 @@ public class BasketActivity extends AppCompatActivity {
             }
         });
 
-        scanButton = findViewById(R.id.scanButton);
+        /*scanButton = findViewById(R.id.scanButton);
         scanButton.setOnClickListener(view -> {
             Intent intent = new Intent(this, ScanActivity.class);
             startActivity(intent);
-        });
+        });*/
     }
 
     private void openScanActivity() {
