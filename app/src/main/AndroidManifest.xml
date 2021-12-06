@@ -32,6 +32,11 @@
         <activity
             android:name=".activities.wishlist.WishlistsActivity"
             android:exported="false"
+            android:label="WishlistsActivity"
+            android:theme="@style/Theme.MobileApp.NoActionBar" />
+        <activity
+            android:name=".activities.wishlist.WishlistProductsActivity"
+            android:exported="false"
             android:label="WishlistActivity"
             android:theme="@style/Theme.MobileApp.NoActionBar" />
         <activity

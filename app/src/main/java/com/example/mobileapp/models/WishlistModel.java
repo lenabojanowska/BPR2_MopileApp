@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 public class WishlistModel {
 
-    private long id;
+    private int id;
 
     private String name;
 
@@ -23,7 +23,7 @@ public class WishlistModel {
 
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 

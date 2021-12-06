@@ -46,6 +46,9 @@ public class WishlistsActivity extends AppCompatActivity implements WishlistAdap
 
     private FirebaseAuth firebaseAuth;
 
+    private WishlistModel wishlistModel;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         wishlistViewModel = new ViewModelProvider(this).get(WishlistViewModel.class);
@@ -121,9 +124,14 @@ public class WishlistsActivity extends AppCompatActivity implements WishlistAdap
 
     @Override
     public void onWishlistClick(int position) {
-        wishlistList.get(position);
-        Intent intent = new Intent(this, WishlistActivity.class);
+
+        Intent intent = new Intent(this, WishlistProductsActivity.class);
+        intent.putExtra("name", wishlistList.get(position).getName());
+
+        intent.putExtra("id", wishlistList.get(position).getId());
+        intent.putExtra("profileId", wishlistList.get(position).getProfileId());
         startActivity(intent);
+        Log.d(TAG, "wishlist clicked: " + wishlistList.get(position).getId());
     }
 
     /*private void checkUser() {

@@ -1,22 +1,14 @@
-package com.example.mobileapp.activities.product;
+package com.example.mobileapp.activities.products;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mobileapp.R;
-import com.example.mobileapp.activities.product.adapter.ProductsAdapter;
-import com.example.mobileapp.activities.wishlist.adapter.WishlistAdapter;
+import com.example.mobileapp.activities.products.adapter.ProductsAdapter;
 import com.example.mobileapp.models.ProductModel;
-import com.example.mobileapp.models.WishlistModel;
 import com.example.mobileapp.viewmodels.ProductViewModel;
-import com.example.mobileapp.viewmodels.WishlistViewModel;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
 

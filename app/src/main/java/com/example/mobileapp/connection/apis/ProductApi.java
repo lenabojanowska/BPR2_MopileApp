@@ -13,6 +13,11 @@ import retrofit2.http.Query;
 public interface ProductApi {
 
     @GET("Products/{id}")
-    Call<List<ProductModel>> getProductListByCategory(@Path("id") long id);
+    Call<List<ProductModel>> getProductListByCategory(@Query("id") long id);
+
+    @GET("wishListProducts")
+    Call<List<ProductModel>> getProductsOnWishlist(@Query("wishListId") long wishlistId);
+
+
 
 }

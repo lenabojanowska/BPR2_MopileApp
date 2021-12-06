@@ -12,7 +12,6 @@ import android.view.View;
 import com.example.mobileapp.MainActivity;
 import com.example.mobileapp.R;
 import com.example.mobileapp.activities.basket.BasketActivity;
-import com.example.mobileapp.activities.product.ProductsActivity;
 import com.example.mobileapp.activities.profile.ProfileActivity;
 import com.example.mobileapp.activities.wishlist.WishlistsActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
