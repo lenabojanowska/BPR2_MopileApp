@@ -2,6 +2,7 @@ package com.example.mobileapp.connection;
 
 import com.example.mobileapp.connection.apis.NewsletterApi;
 import com.example.mobileapp.connection.apis.ProductApi;
+import com.example.mobileapp.connection.apis.StoreApi;
 import com.example.mobileapp.connection.apis.WishlistApi;
 
 import java.security.cert.CertificateException;
@@ -35,11 +36,15 @@ public class ServiceGenerator {
 
     private static NewsletterApi newsletterApi = retrofit.create(NewsletterApi.class);
 
+    private static StoreApi storeApi = retrofit.create(StoreApi.class);
+
     public static WishlistApi getWishListApi() { return wishlistApi; }
 
     public static ProductApi getProductApi() { return productApi; }
 
     public static NewsletterApi getNewsletterApi() { return newsletterApi; }
+
+    public static StoreApi getStoreApi() { return storeApi; }
 
 
     public static OkHttpClient.Builder getUnsafeOkHttpClient() {

@@ -5,20 +5,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.search.SearchActivity">
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="-4dp"
-        app:itemBackground="@color/purple_200"
-        app:itemIconTint="@drawable/selector"
-        app:itemTextColor="@drawable/selector"
-        app:menu="@menu/menu_navigation" />
+    tools:context=".activities.search.SearchActivity"
+    android:id="@+id/searchContainer">
 
     <Button
+        android:id="@+id/storeButton"
+        android:layout_width="106dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="31dp"
+        android:text="Choose a store" />
+
+    <TextView
+        android:id="@+id/storeTextView"
+        android:layout_width="239dp"
+        android:layout_height="41dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="7dp"
+        android:layout_toStartOf="@+id/storeButton"
+        android:text="Store" />
+
+    <!--<Button
         android:id="@+id/diaryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,6 +50,18 @@
         android:layout_marginTop="318dp"
         android:layout_marginEnd="161dp"
         android:text="Sweets"
-        android:onClick="getSweetsProducts"/>
+        android:onClick="getSweetsProducts"/>-->
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-4dp"
+        app:itemBackground="@color/purple_200"
+        app:itemIconTint="@drawable/selector"
+        app:itemTextColor="@drawable/selector"
+        app:menu="@menu/menu_navigation" />
+
 
 </RelativeLayout>
