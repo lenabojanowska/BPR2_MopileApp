@@ -38,7 +38,7 @@ public class WishlistProductsRepository {
 
     public void GetProductsOnWishlist(int wishlistId){
         ProductApi productApi = ServiceGenerator.getProductApi();
-        Call<List<ProductModel>> call = productApi.getProductsOnWishlist(2);
+        Call<List<ProductModel>> call = productApi.getProductsOnWishlist(wishlistId);
         call.enqueue(new Callback<List<ProductModel>>() {
             @Override
             public void onResponse(Call<List<ProductModel>> call, Response<List<ProductModel>> response) {

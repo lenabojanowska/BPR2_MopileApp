@@ -1,6 +1,7 @@
 package com.example.mobileapp.activities.wishlist.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,10 +72,12 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
 
         public ViewHolder(@NonNull View itemView, OnWishlistListener onWishlistListener) {
             super(itemView);
-            wishlistName = (TextView)  itemView.findViewById(R.id.wishlistName);
-            this.onWishlistListener = onWishlistListener;
+            wishlistName = (TextView) itemView.findViewById(R.id.wishlistName);
 
+            this.onWishlistListener = onWishlistListener;
             itemView.setOnClickListener(this);
+
+            Log.v("tag", "check sth " + wishlistName);
         }
 
         @Override

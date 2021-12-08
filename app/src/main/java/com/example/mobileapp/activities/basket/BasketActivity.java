@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.mobileapp.MainActivity;
+import com.example.mobileapp.activities.main.MainActivity;
 import com.example.mobileapp.R;
 import com.example.mobileapp.activities.profile.ProfileActivity;
 import com.example.mobileapp.activities.scan.ScanActivity;
