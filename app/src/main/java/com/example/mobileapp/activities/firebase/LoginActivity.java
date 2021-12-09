@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.mobileapp.activities.main.MainActivity;
+import com.example.mobileapp.activities.main.NewsletterActivity;
 import com.example.mobileapp.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
     private void checkUser() {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         if(firebaseUser != null){
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, NewsletterActivity.class));
             finish();
         }
     }
@@ -130,7 +130,7 @@ public class LoginActivity extends AppCompatActivity {
                         else{
                             Log.d(TAG, "onSuccess: existing User  " + email);
                         }
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        startActivity(new Intent(LoginActivity.this, NewsletterActivity.class));
                         finish();
                     }
                 })

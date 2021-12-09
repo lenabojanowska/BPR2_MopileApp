@@ -4,53 +4,46 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.inputmethod.EditorInfo;
+import android.widget.SearchView;
 
-import com.example.mobileapp.activities.main.MainActivity;
+import com.example.mobileapp.activities.main.NewsletterActivity;
 import com.example.mobileapp.R;
 import com.example.mobileapp.activities.basket.BasketActivity;
+import com.example.mobileapp.activities.product.ProductActivity;
 import com.example.mobileapp.activities.profile.ProfileActivity;
+import com.example.mobileapp.activities.wishlist.WishlistProductsActivity;
 import com.example.mobileapp.activities.wishlist.WishlistsActivity;
-import com.example.mobileapp.connection.ServiceGenerator;
-import com.example.mobileapp.connection.apis.StoreApi;
-import com.example.mobileapp.fragments.store.StoreFragment;
-import com.example.mobileapp.models.StoreModel;
-import com.example.mobileapp.models.WishlistModel;
-import com.example.mobileapp.viewmodels.StoreViewModel;
-import com.example.mobileapp.viewmodels.WishlistViewModel;
+import com.example.mobileapp.activities.search.adapter.SearchAdapter;
+import com.example.mobileapp.models.ProductModel;
+import com.example.mobileapp.viewmodels.AllProductsViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.gson.JsonArray;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity implements SearchAdapter.OnProductListener {
 
     BottomNavigationView bottomNavigationView;
-    private StoreViewModel storeViewModel;
 
-    private Button searchStoreButton;
-    private TextView storeNameTextView;
+    private AllProductsViewModel allProductsViewModel;
+
+    private RecyclerView recyclerView;
+    private SearchAdapter searchAdapter;
+
+    private List<ProductModel> productList;
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,24 +51,42 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        Intent intent = getIntent();
-        String name = intent.getStringExtra("name");
-
-       /* spinner = findViewById(R.id.storeSpinner);
-        fetchJson();*/
-
-        searchStoreButton = findViewById(R.id.storeButton);
-        storeNameTextView = findViewById(R.id.storeTextView);
-
-        searchStoreButton.setOnClickListener(new View.OnClickListener() {
+        searchView = findViewById(R.id.allProductsSearchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onClick(View v) {
-              openDialog();
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filter(newText);
+                return true;
             }
         });
 
-        storeNameTextView.setText(name);
+        recyclerView = (RecyclerView) findViewById(R.id.allProductsRecyclerView);
+        recyclerView.setHasFixedSize(true);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        searchAdapter = new SearchAdapter(productList, this,this);
+        recyclerView.setAdapter(searchAdapter);
+        productList = new ArrayList<>();
+
+        allProductsViewModel = ViewModelProviders.of(this).get(AllProductsViewModel.class);
+        allProductsViewModel.getProducts().observe(this, new Observer<List<ProductModel>>() {
+            @Override
+            public void onChanged(List<ProductModel> productModels) {
+                if(productModels != null){
+                    productList = productModels;
+                    searchAdapter.setAllProductsList(productModels);
+                }
+
+            }
+        });
+        allProductsViewModel.GetAllProducts();
+
+
 
         //Toast.makeText(this, "name: " + name, Toast.LENGTH_LONG).show();
 
@@ -93,7 +104,7 @@ public class SearchActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.home:
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(), NewsletterActivity.class));
                         overridePendingTransition(0,0);
                         return true;
 
@@ -117,11 +128,59 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
-    private void openDialog() {
+    private void filter(String newText) {
+        List<ProductModel> filteredList = new ArrayList<>();
+        for(ProductModel item : productList){
+            if(item.getName().toLowerCase().contains(newText.toLowerCase())){
+                filteredList.add(item);
+            }
+        }
+        searchAdapter.filterList(filteredList);
+    }
+
+    @Override
+    public void onProductClick(int position) {
+
+      /*  Bundle bundle = new Bundle();
+        bundle.putString("name", productList.get(position).getName());
+        bundle.putString("category", productList.get(position).getCategory());
+        bundle.putString("brand",  productList.get(position).getBrand());
+        bundle.putDouble("price",  productList.get(position).getPrice());*/
+
+        Intent intent = new Intent(this, ProductActivity.class);
+        intent.putExtra("name", productList.get(position).getName());
+        intent.putExtra("category", productList.get(position).getCategory());
+        intent.putExtra("brand",  productList.get(position).getBrand());
+        intent.putExtra("price",  productList.get(position).getPrice());
+        startActivity(intent);
+    }
+
+ /*   @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        SearchView searchView = findViewById(R.id.allProductsSearchView);
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+        return true;
+    }*/
+
+   /*  private void openDialog() {
         StoreFragment storeFragment = new StoreFragment();
         storeFragment.show(getSupportFragmentManager(), "store fragment");
 
-    }
+    }*/
 
    /* private void fetchJson() {
         StoreApi storeApi = ServiceGenerator.getStoreApi();

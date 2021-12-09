@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,8 +41,12 @@ public class NewsletterAdapter extends RecyclerView.Adapter<NewsletterAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.newsletterName.setText(newsletterList.get(position).getTitle());
+        String string = newsletterList.get(position).getTitle();
+
+        holder.newsletterName.setText(string);
+       // Log.v("Tag","hello"+ newsletterList.get(position).getTitle().toString());
     }
+
 
     @Override
     public int getItemCount() {
@@ -55,12 +60,13 @@ public class NewsletterAdapter extends RecyclerView.Adapter<NewsletterAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView newsletterName;
 
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             newsletterName = (TextView) itemView.findViewById(R.id.omg);
+
             Log.v("tag", "check sth " + newsletterName.toString());
+
 
         }
     }

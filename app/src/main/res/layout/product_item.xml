@@ -2,7 +2,7 @@
 
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="190dp"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/CardView"
     android:layout_height="wrap_content"
@@ -11,61 +11,40 @@
     card_view:cardCornerRadius="8dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="407dp"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical">
-
-        <!--<ImageView
-            android:id="@+id/Catagriimage"
-            android:layout_width="match_parent"
-            android:layout_height="197dp"
-            android:layout_gravity="left"
-            android:background=""
-            android:contentDescription="@null"
-            android:padding="10dp" />-->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:padding="5dp"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/categoryTextView"
-                android:textColor="@color/colorPrimary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:textAppearanceSmall"
-                android:textStyle="bold"
-                android:inputType="textMultiLine"
-                android:layout_weight="1"
-                android:padding="2dp"
-                android:text="" />
+            android:orientation="vertical"
+            android:padding="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <!--<TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textAppearance="?android:textAppearanceSmall"
-                    android:padding="2dp"
-                    android:textStyle="bold"
-                    android:text="Joint:  " />-->
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/productImage"
+                    android:layout_width="181dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="left"
+                    android:src="@drawable/product_image" />
+
                 <TextView
                     android:id="@+id/nameTextView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textAppearance="?android:textAppearanceSmall"
+                    android:layout_height="match_parent"
+                    android:gravity="left"
                     android:padding="2dp"
-                    android:text="" />
+                    android:text="Product name"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -73,78 +52,45 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="92dp"
-                    android:layout_height="match_parent"
+                    android:id="@+id/categoryTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:padding="2dp"
-                    android:text="Amount:  "
-                    android:textStyle="bold" />
+                    android:textSize="15dp"
+                    android:text="Category"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="4dp"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
                 <TextView
                     android:id="@+id/priceTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="356dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:textAppearance="?android:textAppearanceSmall"
-                    android:padding="2dp"
-                    android:text="" />
+                    android:padding="4dp"
+                    android:text="Price"
+                    android:textSize="15dp"/>
             </LinearLayout>
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:textAppearanceSmall"
-                    android:padding="2dp"
-                    android:textStyle="bold"
-                    android:text="Price:  " />
-
-                <TextView
-                    android:id="@+id/brandTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:textAppearance="?android:textAppearanceSmall"
-                    android:padding="2dp"
-                    android:text="" />
-            </LinearLayout>
-
-           <!-- <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textAppearance="?android:textAppearanceSmall"
-                    android:padding="2dp"
-                    android:textStyle="bold"
-                    android:text="Days:  " />
-
-                <TextView
-                    android:id="@+id/days"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="@color/black"
-                    android:gravity="center"
-                    android:textAppearance="?android:textAppearanceSmall"
-                    android:padding="2dp"
-                    android:text="" />
-            </LinearLayout>-->
-
-            <TextView
-                android:id="@+id/CatagriId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:text=""/>
         </LinearLayout>
 
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>

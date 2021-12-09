@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.mobileapp.R;
 import com.example.mobileapp.activities.basket.BasketActivity;
@@ -34,10 +35,10 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class NewsletterActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
-    private ActivityMainBinding binding;
+    //private ActivityMainBinding binding;
 
     private NewsletterViewModel newsletterViewModel;
 
@@ -48,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
 
+    private TextView usernameTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //newsletterViewModel = new ViewModelProvider(this).get(NewsletterViewModel.class);
@@ -55,8 +58,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       /* firebaseAuth = FirebaseAuth.getInstance();
-        checkUser();*/
+        usernameTextView = findViewById(R.id.usernameText);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        checkUser();
 
         recyclerView = (RecyclerView) findViewById(R.id.newslettersRecyclerView);
         recyclerView.setHasFixedSize(true);
@@ -114,15 +119,17 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-   /* private void checkUser() {
+    private void checkUser() {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         if(firebaseUser == null){
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, NewsletterActivity.class));
             finish();
         }else{
             String email = firebaseUser.getEmail();
             Log.d(TAG, "email on Main Activity " + email);
+
+            usernameTextView.setText(email);
             //binding.emailTextView.setText(email);
         }
-    }*/
+    }
 }

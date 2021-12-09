@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.mobileapp.activities.main.MainActivity;
+import com.example.mobileapp.activities.main.NewsletterActivity;
 import com.example.mobileapp.R;
 import com.example.mobileapp.activities.basket.BasketActivity;
 import com.example.mobileapp.activities.search.SearchActivity;
@@ -49,7 +49,7 @@ public class ProfileActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.home:
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(), NewsletterActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.profile:

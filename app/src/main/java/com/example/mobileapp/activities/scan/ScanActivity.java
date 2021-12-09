@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
-import com.example.mobileapp.activities.main.MainActivity;
+import com.example.mobileapp.activities.main.NewsletterActivity;
 import com.example.mobileapp.R;
 import com.example.mobileapp.activities.basket.BasketActivity;
 import com.example.mobileapp.activities.profile.ProfileActivity;
@@ -46,7 +46,7 @@ public class ScanActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.home:
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(), NewsletterActivity.class));
                         overridePendingTransition(0,0);
                         return true;
 

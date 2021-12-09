@@ -15,7 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
-import com.example.mobileapp.activities.main.MainActivity;
+import com.example.mobileapp.activities.main.NewsletterActivity;
 import com.example.mobileapp.R;
 import com.example.mobileapp.activities.basket.BasketActivity;
 import com.example.mobileapp.activities.profile.ProfileActivity;
@@ -104,7 +104,7 @@ public class WishlistsActivity extends AppCompatActivity implements WishlistAdap
                         return true;
 
                     case R.id.home:
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(), NewsletterActivity.class));
                         overridePendingTransition(0,0);
                         return true;
 

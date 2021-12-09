@@ -18,6 +18,9 @@ public interface ProductApi {
     @GET("wishListProducts")
     Call<List<ProductModel>> getProductsOnWishlist(@Query("wishListId") long wishlistId);
 
+    @GET("api/Products")
+    Call<List<ProductModel>> getProducts();
+
 
 
 }

@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.mobileapp.activities.main.MainActivity;
+import com.example.mobileapp.activities.main.NewsletterActivity;
 import com.example.mobileapp.R;
 import com.example.mobileapp.activities.profile.ProfileActivity;
 import com.example.mobileapp.activities.scan.ScanActivity;
@@ -53,7 +53,7 @@ public class BasketActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.home:
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(), NewsletterActivity.class));
                         overridePendingTransition(0,0);
                         return true;
 

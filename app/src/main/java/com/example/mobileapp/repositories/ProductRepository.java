@@ -40,8 +40,6 @@ public class ProductRepository {
 
     public void getProductListByCategory(long id){
         ProductApi productApi = ServiceGenerator.getProductApi();
-        //ProductModel productModel = new ProductModel(category);
-
         Call<List<ProductModel>> call = productApi.getProductListByCategory(id);
         call.enqueue(new Callback<List<ProductModel>>() {
             @Override
@@ -49,7 +47,7 @@ public class ProductRepository {
                if(response.isSuccessful()){
                    mProduct.setValue(response.body());
                }else{
-                   Log.v("Tag", "Error " + response.errorBody());
+                   Log.v("Tag", "Errorsaasxasas " + response.errorBody());
                }
             }
 
@@ -58,6 +56,5 @@ public class ProductRepository {
 
             }
         });
-
     }
 }

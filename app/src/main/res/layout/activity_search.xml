@@ -8,7 +8,7 @@
     tools:context=".activities.search.SearchActivity"
     android:id="@+id/searchContainer">
 
-    <Button
+    <!--<Button
         android:id="@+id/storeButton"
         android:layout_width="106dp"
         android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
         android:layout_marginEnd="7dp"
         android:layout_toStartOf="@+id/storeButton"
         android:text="Store" />
-
+-->
     <!--<Button
         android:id="@+id/diaryButton"
         android:layout_width="wrap_content"
@@ -52,16 +52,77 @@
         android:text="Sweets"
         android:onClick="getSweetsProducts"/>-->
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="23dp"
+        android:text="  What are you looking for?"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+    <SearchView
+        android:id="@+id/allProductsSearchView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="6dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/allProductsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="553dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="125dp" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="-4dp"
-        app:itemBackground="@color/purple_200"
+        app:itemBackground="@color/teal_200"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
         app:menu="@menu/menu_navigation" />
 
+
+
+    <!--<com.google.android.material.tabs.TabLayout
+        android:id="@+id/searchTabs"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="162dp">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="All" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Categories" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Brands" />
+    </com.google.android.material.tabs.TabLayout>-->
+
+   <!-- <androidx.viewpager.widget.ViewPager
+        android:id="@+id/searchViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="469dp"
+        android:layout_above="@+id/bottom_navigation"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="210dp"
+        android:layout_marginBottom="0dp" />
+-->
 
 </RelativeLayout>

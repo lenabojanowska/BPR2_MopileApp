@@ -1,15 +1,13 @@
-package com.example.mobileapp.fragments.store;
+package com.example.mobileapp.fragments.wishlist;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -19,24 +17,27 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mobileapp.R;
+import com.example.mobileapp.activities.product.ProductActivity;
 import com.example.mobileapp.activities.search.SearchActivity;
-
+import com.example.mobileapp.activities.wishlist.adapter.WishlistAdapter;
 import com.example.mobileapp.fragments.store.adapter.StoreAdapter;
 import com.example.mobileapp.models.StoreModel;
+import com.example.mobileapp.models.WishlistModel;
 import com.example.mobileapp.viewmodels.StoreViewModel;
+import com.example.mobileapp.viewmodels.WishlistViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class StoreFragment extends DialogFragment  implements  StoreAdapter.OnStoreListener{
+public class WishlistFragment extends DialogFragment implements WishlistAdapter.OnWishlistListener {
 
-    private StoreViewModel storeViewModel;
+    private WishlistViewModel wishlistViewModel;
 
     private RecyclerView recyclerView;
 
-    private StoreAdapter adapter;
+    private WishlistAdapter adapter;
 
-    private List<StoreModel> storeList;
+    private List<WishlistModel> wishlistList;
 
     @Nullable
     @Override
@@ -53,37 +54,36 @@ public class StoreFragment extends DialogFragment  implements  StoreAdapter.OnSt
         /*AllFragment allFragment = new AllFragment();
         allFragment.setArguments(bundle);
         fragmentTransaction.replace(R.id.allProductsRecyclerView, allFragment);
-        fragmentTransaction.commit();
-*/
+        fragmentTransaction.commit();*/
+
         recyclerView = (RecyclerView) view.findViewById(R.id.storeRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        adapter = new StoreAdapter(storeList, this.getActivity(), (StoreAdapter.OnStoreListener) this);
+        adapter = new WishlistAdapter(wishlistList, this.getActivity(), (WishlistAdapter.OnWishlistListener) this);
         recyclerView.setAdapter(adapter);
-        storeList = new ArrayList<>();
+        wishlistList = new ArrayList<>();
 
-        storeViewModel = ViewModelProviders.of(this.getActivity()).get(StoreViewModel.class);
-        storeViewModel.getStores().observe(this, new Observer<List<StoreModel>>() {
+        wishlistViewModel = ViewModelProviders.of(this.getActivity()).get(WishlistViewModel.class);
+        wishlistViewModel.getWishlistList().observe(this, new Observer<List<WishlistModel>>() {
             @Override
-            public void onChanged(List<StoreModel> storeModels) {
-                if(storeModels != null){
-                    storeList = storeModels;
-                    adapter.setStoreList(storeModels);
+            public void onChanged(List<WishlistModel> wishlistModels) {
+                if(wishlistModels != null){
+                    wishlistList = wishlistModels;
+                    adapter.setWishlistList(wishlistModels);
                 }
             }
         });
-        storeViewModel.GetStores();
+        wishlistViewModel.GetRetrofitResponse();
 
         return  view;
     }
 
     @Override
-    public void onStoreClick(int position) {
-        Intent intent = new Intent(this.getActivity(), SearchActivity.class);
-        intent.putExtra("name", storeList.get(position).getName());
+    public void onWishlistClick(int position) {
+        Intent intent = new Intent(this.getActivity(), ProductActivity.class);
+        //intent.putExtra("name", storeList.get(position).getName());
         startActivity(intent);
-
-
 
     }
 }
+
