@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.mobileapp.connection.ServiceGenerator;
 import com.example.mobileapp.connection.apis.WishlistApi;
 import com.example.mobileapp.connection.responses.WishlistsResponse;
+import com.example.mobileapp.models.ProductModel;
 import com.example.mobileapp.models.WishlistModel;
 
 import java.io.IOException;
@@ -125,7 +126,7 @@ public class WishlistRepository {
 
     }
 
-    public void CallRetrofit(String postName, String userName) {
+    public void addWishlist(String postName, String userName) {
 
        WishlistApi wishlistApi = ServiceGenerator.getWishListApi();
         WishlistModel wishlistModel = new WishlistModel(postName, userName);
@@ -139,7 +140,8 @@ public class WishlistRepository {
                 Log.v("Tag", "Posting Wishlist");
                 Log.v("Tag", "The Wishlist posted");
                 Log.v("Tag", "The Wishlist " + response.body().getName());
-                GetWishlistList();
+
+                //mWishlist.setValue((List<WishlistModel>) response.body());
             }
 
             @Override
@@ -149,9 +151,9 @@ public class WishlistRepository {
 
     }
 
-    /*public void DeleteRetrofitResponse(String id) {
+    public void deleteWishlist(long id, WishlistModel wishlistModel) {
         WishlistApi wishlistApi = ServiceGenerator.getWishListApi();
-        Call<Void> call = wishlistApi.deleteWishlistById(Integer.parseInt(id));
+        Call<Void> call = wishlistApi.deleteWishlistById(id);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -159,7 +161,6 @@ public class WishlistRepository {
                 Log.v("Tag", "Deleting wishlist by id ");
                 Log.v("Tag", "Deleted " + response.code());
                 Log.v("Tag", "Deleted Wishlist with " + id + "id");
-                GetRetrofitResponse();
             }
 
             @Override
@@ -167,6 +168,6 @@ public class WishlistRepository {
                 Log.v("Tag", t.toString());
             }
         });
-    }*/
+    }
 
 }

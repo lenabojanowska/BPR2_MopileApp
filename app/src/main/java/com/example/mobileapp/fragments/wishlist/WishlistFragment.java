@@ -2,9 +2,11 @@ package com.example.mobileapp.fragments.wishlist;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,14 +22,26 @@ import com.example.mobileapp.R;
 import com.example.mobileapp.activities.product.ProductActivity;
 import com.example.mobileapp.activities.search.SearchActivity;
 import com.example.mobileapp.activities.wishlist.adapter.WishlistAdapter;
+import com.example.mobileapp.connection.ServiceGenerator;
+import com.example.mobileapp.connection.apis.ProductApi;
+import com.example.mobileapp.connection.apis.WishlistApi;
 import com.example.mobileapp.fragments.store.adapter.StoreAdapter;
+import com.example.mobileapp.models.ProductModel;
 import com.example.mobileapp.models.StoreModel;
 import com.example.mobileapp.models.WishlistModel;
 import com.example.mobileapp.viewmodels.StoreViewModel;
 import com.example.mobileapp.viewmodels.WishlistViewModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class WishlistFragment extends DialogFragment implements WishlistAdapter.OnWishlistListener {
 
@@ -39,24 +53,29 @@ public class WishlistFragment extends DialogFragment implements WishlistAdapter.
 
     private List<WishlistModel> wishlistList;
 
+    private FirebaseAuth firebaseAuth;
+
+    private ProductApi productApi;
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.store_fragment, container);
+        View view = inflater.inflate(R.layout.wishlist_fragment, container);
 
-        String first = "storeList.get(position).getName()";
-        Bundle bundle = new Bundle();
-        bundle.putString("looool", first);
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        String id = firebaseUser.getUid();
 
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        /*AllFragment allFragment = new AllFragment();
-        allFragment.setArguments(bundle);
-        fragmentTransaction.replace(R.id.allProductsRecyclerView, allFragment);
-        fragmentTransaction.commit();*/
+       /* long wId = getArguments().getLong("wId", 2);
+        long wBarcode = getArguments().getLong("wBarcode", 2);
+        String wName = getArguments().getString("wName");
+        String wCat = getArguments().getString("wCat");
+        double wPrice = getArguments().getDouble("wPrice", 0);
+        String wBrand = getArguments().getString("wBrand");*/
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.storeRecyclerView);
+        recyclerView = (RecyclerView) view.findViewById(R.id.wishlistDialogRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         adapter = new WishlistAdapter(wishlistList, this.getActivity(), (WishlistAdapter.OnWishlistListener) this);
@@ -73,17 +92,91 @@ public class WishlistFragment extends DialogFragment implements WishlistAdapter.
                 }
             }
         });
-        wishlistViewModel.GetRetrofitResponse();
+        wishlistViewModel.GetProductListByCategory(id);
+
+        //Toast.makeText(this.getActivity(), "id: " + pId, Toast.LENGTH_LONG).show();
 
         return  view;
     }
 
     @Override
     public void onWishlistClick(int position) {
-        Intent intent = new Intent(this.getActivity(), ProductActivity.class);
-        //intent.putExtra("name", storeList.get(position).getName());
-        startActivity(intent);
+
+        long wId = getArguments().getLong("wId", 2);
+        long wBarcode = getArguments().getLong("wBarcode", 2);
+        String wName = getArguments().getString("wName");
+        String wCat = getArguments().getString("wCat");
+        double wPrice = getArguments().getDouble("wPrice", 0);
+        String wBrand = getArguments().getString("wBrand");
+
+
+        int id = wishlistList.get(position).getId();
+
+        Toast.makeText(this.getActivity(), "id: " + wId + " " + wBrand+ " " + wBarcode+ " " + wName+ " " + wCat+ " " + wPrice, Toast.LENGTH_LONG).show();
+
+        ProductApi productApi = ServiceGenerator.getProductApi();
+        ProductModel productModel = new ProductModel(wId, wBarcode, wName, wCat, wPrice, wBrand);
+        Call<ProductModel> call = productApi.postProductOnWishlist(id, wId, productModel);
+
+        call.enqueue(new Callback<ProductModel>() {
+            @Override
+            public void onResponse(Call<ProductModel> call, Response<ProductModel> response) {
+                Log.v("Tag", "Product added " + response.body().getName());
+            }
+
+            @Override
+            public void onFailure(Call<ProductModel> call, Throwable t) {
+                Log.v("Tag", "Error adding "+ t.toString());
+            }
+        });
+/*
+        int id = wishlistList.get(position).getId();
+
+        ProductApi productApi = ServiceGenerator.getProductApi();
+        ProductModel productModel = new ProductModel(wId, wBarcode, wName, wCat, wPrice, wBrand);
+        Call<ProductModel> call = productApi.postProductOnWishlist(id, wId, productModel);
+
+        call.enqueue(new Callback<ProductModel>() {
+            @Override
+            public void onResponse(Call<ProductModel> call, Response<ProductModel> response) {
+                Log.v("Tag", "Product added " + response.body().getName());
+            }
+
+            @Override
+            public void onFailure(Call<ProductModel> call, Throwable t) {
+                Log.v("Tag", "Error adding "+ t.toString());
+            }
+        });*/
+/*
+
+        Toast.makeText(this.getActivity(), "id: " + pId, Toast.LENGTH_LONG).show();
+        ProductApi productApi = ServiceGenerator.getProductApi();
+        ProductModel productModel = new ProductModel(wId, pId);
+        Call<ProductModel> call = productApi.postProductOnWishlist(wId, pId, );
+*/
 
     }
+
+    /*WishlistApi wishlistApi = ServiceGenerator.getWishListApi();
+    WishlistModel wishlistModel = new WishlistModel(name, id);
+
+    Call<WishlistModel> call = wishlistApi.postWishlist(wishlistModel);
+
+                call.enqueue(new Callback<WishlistModel>() {
+        @Override
+        public void onResponse(Call<WishlistModel> call, Response<WishlistModel> response) {
+            Log.v("Tag", "--------//--------");
+            Log.v("Tag", "Posting Wishlist");
+            Log.v("Tag", "The Wishlist posted");
+            Log.v("Tag", "The Wishlist " + response.body().getName());
+
+            //mWishlist.setValue((List<WishlistModel>) response.body());
+        }
+
+        @Override
+        public void onFailure(Call<WishlistModel> call, Throwable t) { Log.v("Tag", t.toString());
+        }
+    });*/
+
 }
 

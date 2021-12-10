@@ -25,6 +25,7 @@ import com.example.mobileapp.activities.profile.ProfileActivity;
 import com.example.mobileapp.activities.wishlist.WishlistProductsActivity;
 import com.example.mobileapp.activities.wishlist.WishlistsActivity;
 import com.example.mobileapp.activities.search.adapter.SearchAdapter;
+import com.example.mobileapp.fragments.wishlist.WishlistFragment;
 import com.example.mobileapp.models.ProductModel;
 import com.example.mobileapp.viewmodels.AllProductsViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -88,6 +89,7 @@ public class SearchActivity extends AppCompatActivity implements SearchAdapter.O
 
 
 
+
         //Toast.makeText(this, "name: " + name, Toast.LENGTH_LONG).show();
 
         //initialize and assign variable
@@ -147,12 +149,27 @@ public class SearchActivity extends AppCompatActivity implements SearchAdapter.O
         bundle.putString("brand",  productList.get(position).getBrand());
         bundle.putDouble("price",  productList.get(position).getPrice());*/
 
+
         Intent intent = new Intent(this, ProductActivity.class);
         intent.putExtra("name", productList.get(position).getName());
         intent.putExtra("category", productList.get(position).getCategory());
         intent.putExtra("brand",  productList.get(position).getBrand());
         intent.putExtra("price",  productList.get(position).getPrice());
+        intent.putExtra("pId", productList.get(position).getId());
+        intent.putExtra("pBarcode", productList.get(position).getBarcode());
+
+        /*WishlistFragment fragment = new WishlistFragment();
+        Bundle bundle = new Bundle();
+        bundle.putLong("wId", productList.get(position).getId());
+        bundle.putLong("wBarcode", productList.get(position).getBarcode());
+        bundle.putString("wName", productList.get(position).getName());
+        bundle.putString("wCat", productList.get(position).getCategory());
+        bundle.putDouble("wPrice", productList.get(position).getPrice());
+        bundle.putString("wBrand", productList.get(position).getBrand());
+        fragment.setArguments(bundle);*/
+
         startActivity(intent);
+
     }
 
  /*   @Override

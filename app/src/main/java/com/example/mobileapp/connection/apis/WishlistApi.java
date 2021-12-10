@@ -20,10 +20,12 @@ public interface WishlistApi {
     @GET("customerWishLists")
     Call<List<WishlistModel>> getWishListsByCustomerID(@Query("customerId") String profileId);
 
-    @POST("Wishlists")
+    @POST("api/Wishlists")
     Call<WishlistModel> postWishlist(@Body WishlistModel wishlistModel);
 
-    @DELETE("Wishlists/{id}")
-    Call<Void> deleteWishlistById(@Path("id") int id);
+    @DELETE("api/Wishlists/{id}")
+    Call<Void> deleteWishlistById(@Path("id") long id);
+
+
 
 }

@@ -5,8 +5,10 @@ import com.example.mobileapp.models.ProductModel;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.PATCH;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -21,6 +23,8 @@ public interface ProductApi {
     @GET("api/Products")
     Call<List<ProductModel>> getProducts();
 
+    @POST("wishListProducts/{wishListId}/{productId}")
+    Call<ProductModel> postProductOnWishlist(@Path("wishListId") int wishlistId, @Path("productId") long productId, @Body ProductModel productModel);
 
 
 }

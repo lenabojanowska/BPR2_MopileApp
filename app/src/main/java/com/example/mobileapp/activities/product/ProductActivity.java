@@ -36,6 +36,8 @@ public class ProductActivity extends AppCompatActivity {
 
     FloatingActionButton floatingActionButton;
 
+    public long id;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,19 +66,40 @@ public class ProductActivity extends AppCompatActivity {
         String category = intent.getStringExtra("category");
         String brand = intent.getStringExtra("brand");
         double price = intent.getDoubleExtra("price", 0);
+        long id = intent.getLongExtra("pId",0);
+        long barcode = intent.getLongExtra("pBarcode",0);
 
         pName.setText(name);
         pCategory.setText(category);
         pBrand.setText(brand);
         pPrice.setText(String.valueOf(price));
 
-        Toast.makeText(this, "id: " + price, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "id: " + id, Toast.LENGTH_LONG).show();
+
 
     }
 
     private void openWishlistDialogFragment() {
+        Intent intent = getIntent();
+        String name = intent.getStringExtra("name");
+        String category = intent.getStringExtra("category");
+        String brand = intent.getStringExtra("brand");
+        long barcode = intent.getLongExtra("pBarcode",0);
+        double price = intent.getDoubleExtra("price", 0);
+        long id = intent.getLongExtra("pId",0);
+
+       /* Intent intent = getIntent();
+        long id = intent.getLongExtra("pId",0);*/
 
         WishlistFragment wishlistFragment = new WishlistFragment();
+        Bundle bundle = new Bundle();
+        bundle.putLong("wId",id);
+        bundle.putString("wName",name);
+        bundle.putString("wCat",category);
+        bundle.putString("wBrand",brand);
+        bundle.putDouble("wPrice",price);
+        bundle.putLong("wBarcode", barcode);
+        wishlistFragment.setArguments(bundle);
         wishlistFragment.show(getSupportFragmentManager(), "wishlist fragment");
     }
 

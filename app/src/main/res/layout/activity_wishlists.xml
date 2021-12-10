@@ -29,7 +29,7 @@
         app:menu="@menu/menu_navigation" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton2"
+        android:id="@+id/addWishlistFloatingActionButton"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_alignParentEnd="true"
