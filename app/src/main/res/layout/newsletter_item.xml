@@ -6,38 +6,30 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:layout_margin="20px"
-        android:padding="20px"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="270dp"
+        android:layout_margin="20px"
+        android:padding="20px">
 
         <LinearLayout
-            android:layout_width="292dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <!--<TextView
-                android:id="@+id/productImage"
+            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Image" />-->
+                android:layout_height="213dp"
+                android:layout_gravity="center"
+                android:src="@drawable/slae" />
 
+            <TextView
+                android:id="@+id/omg"
+                android:layout_width="356dp"
+                android:layout_height="53dp"
+                android:layout_gravity="right"
+                android:text="Newsletter"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/omg"
-            android:layout_width="368dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:text="Wishlist name"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-        <EditText
-            android:id="@+id/editTextNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="151dp"
-            android:ems="10"
-            android:inputType="number" />
 
 
     </androidx.cardview.widget.CardView>

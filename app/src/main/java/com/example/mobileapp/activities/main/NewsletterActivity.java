@@ -21,6 +21,7 @@ import com.example.mobileapp.activities.basket.BasketActivity;
 import com.example.mobileapp.activities.main.adapter.NewsletterAdapter;
 import com.example.mobileapp.activities.profile.ProfileActivity;
 import com.example.mobileapp.activities.search.SearchActivity;
+import com.example.mobileapp.activities.storeProduct.StoreProductActivity;
 import com.example.mobileapp.activities.wishlist.WishlistsActivity;
 import com.example.mobileapp.activities.wishlist.adapter.WishlistAdapter;
 import com.example.mobileapp.databinding.ActivityMainBinding;
@@ -92,6 +93,7 @@ public class NewsletterActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()){
                     case R.id.home:
+
                         return true;
 
                     case R.id.search:
@@ -113,6 +115,8 @@ public class NewsletterActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         overridePendingTransition(0,0);
                         return true;
+
+
                 }
                 return false;
             }

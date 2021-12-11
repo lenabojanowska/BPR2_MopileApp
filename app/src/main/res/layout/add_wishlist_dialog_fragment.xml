@@ -4,23 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+<androidx.cardview.widget.CardView
+    android:layout_width="400dp"
+    android:layout_height="200dp"
+    tools:ignore="MissingConstraints">
 
-    <TextView
-        android:id="@+id/wishlistEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Wishlist"
-        tools:layout_editor_absoluteX="89dp"
-        tools:layout_editor_absoluteY="332dp" />
+    <RelativeLayout
+        android:layout_width="303dp"
+        android:layout_height="320dp">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:text="Put a name of wishlist"/>
 
-    <Button
-        android:id="@+id/sthButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="440dp"
-        android:text="Button"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="138dp" />
+        <TextView
+            android:id="@+id/wishlistEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="39dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="87dp"
+            android:layout_marginEnd="41dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Wishlist"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/sthButton"
+            android:layout_width="141dp"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="152dp"
+            android:layout_marginEnd="65dp"
+            android:layout_marginBottom="141dp"
+            android:text="Button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

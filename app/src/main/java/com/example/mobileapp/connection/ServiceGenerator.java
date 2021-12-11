@@ -2,6 +2,7 @@ package com.example.mobileapp.connection;
 
 import com.example.mobileapp.connection.apis.NewsletterApi;
 import com.example.mobileapp.connection.apis.ProductApi;
+import com.example.mobileapp.connection.apis.ReviewApi;
 import com.example.mobileapp.connection.apis.StoreApi;
 import com.example.mobileapp.connection.apis.WishlistApi;
 
@@ -38,6 +39,8 @@ public class ServiceGenerator {
 
     private static StoreApi storeApi = retrofit.create(StoreApi.class);
 
+    private static ReviewApi reviewApi = retrofit.create(ReviewApi.class);
+
     public static WishlistApi getWishListApi() { return wishlistApi; }
 
     public static ProductApi getProductApi() { return productApi; }
@@ -45,6 +48,8 @@ public class ServiceGenerator {
     public static NewsletterApi getNewsletterApi() { return newsletterApi; }
 
     public static StoreApi getStoreApi() { return storeApi; }
+
+    public static ReviewApi getReviewApi(){ return  reviewApi; }
 
 
     public static OkHttpClient.Builder getUnsafeOkHttpClient() {

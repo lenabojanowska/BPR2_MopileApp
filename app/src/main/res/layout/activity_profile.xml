@@ -7,86 +7,104 @@
     android:layout_height="match_parent"
     tools:context=".activities.profile.ProfileActivity">
 
-    <ImageView
+    <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="73dp"
-        android:src="@drawable/profile" />
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:background="@drawable/sth">
+        </RelativeLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="290dp"
-        android:gravity="center"
-        android:text="Karla"
-        android:textSize="40dp"
-        android:textStyle="bold"
-       />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="420dp"
-        android:text=" You can manage reviews or your account here."
-        android:textSize="17dp"
-        />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="198dp"
-        android:layout_above="@+id/bottom_navigation"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="481dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="0dp"
-        android:orientation="vertical">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="73dp"
+            android:src="@drawable/profile" />
 
         <TextView
-            android:id="@+id/reviewTextView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:padding="6dp"
-            android:text="Reviews                               >"
-            android:textSize="20dp"
-            android:textStyle="bold">
-
-        </TextView>
-
-        <TextView
-            android:id="@+id/settingTextView"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:padding="6dp"
-            android:text="Settings                               >"
-            android:textSize="20dp"
-            android:textStyle="bold"/>
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="290dp"
+            android:gravity="center"
+            android:text="Karla"
+            android:textSize="40dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
 
         <TextView
-            android:id="@+id/logoutTextView"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:padding="6dp"
-            android:text="Log out                                >"
-            android:textSize="20dp"
-            android:textStyle="bold"/>
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="420dp"
+            android:text=" You can manage reviews or your account here."
+            android:textSize="17dp"
+            android:textColor="@color/black"/>
 
-        <TextView
-            android:id="@+id/deleteAccountTextView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:padding="3dp"
-            android:text=" Delete Account"
-            android:textSize="15dp" />
+            android:layout_height="198dp"
+            android:layout_above="@+id/bottom_navigation"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="481dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/reviewTextView"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:onClick="openReviewFragment"
+                android:padding="6dp"
+                android:text="Reviews                               >"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:textColor="@color/black">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/settingTextView"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:padding="6dp"
+                android:text="Settings                               >"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/logoutTextView"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:onClick="logOutUser"
+                android:padding="6dp"
+                android:text="Log out                                >"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/deleteAccountTextView"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:onClick="deleteUser"
+                android:padding="3dp"
+                android:text=" Delete Account"
+                android:textSize="15dp"
+                android:textColor="@color/black"/>
 
 
-    </LinearLayout>
-
+        </LinearLayout>
+    </FrameLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"

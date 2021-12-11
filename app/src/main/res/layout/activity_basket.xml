@@ -6,7 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.basket.BasketActivity">
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:background="@drawable/sth">
+    </RelativeLayout>
     <!-- <Button
         android:id="@+id/scanButton"
         android:layout_width="113dp"
@@ -19,12 +23,13 @@
         android:layout_marginBottom="84dp"
         android:text="Scan" />-->
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/basketRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="535dp"></androidx.recyclerview.widget.RecyclerView>
-
-
+        android:layout_height="496dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="34dp"></androidx.recyclerview.widget.RecyclerView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

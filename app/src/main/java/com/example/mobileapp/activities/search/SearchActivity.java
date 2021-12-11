@@ -22,6 +22,7 @@ import com.example.mobileapp.R;
 import com.example.mobileapp.activities.basket.BasketActivity;
 import com.example.mobileapp.activities.product.ProductActivity;
 import com.example.mobileapp.activities.profile.ProfileActivity;
+import com.example.mobileapp.activities.storeProduct.StoreProductActivity;
 import com.example.mobileapp.activities.wishlist.WishlistProductsActivity;
 import com.example.mobileapp.activities.wishlist.WishlistsActivity;
 import com.example.mobileapp.activities.search.adapter.SearchAdapter;
@@ -124,6 +125,8 @@ public class SearchActivity extends AppCompatActivity implements SearchAdapter.O
                         startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         overridePendingTransition(0,0);
                         return true;
+
+
                 }
                 return false;
             }

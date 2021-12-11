@@ -22,14 +22,16 @@
                 android:layout_width="396dp"
                 android:layout_height="38dp"
                 android:text="Store Name"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:background="@drawable/row_selector"/>
 
             <TextView
                 android:id="@+id/storeAddress"
                 android:layout_width="396dp"
                 android:layout_height="38dp"
                 android:text="Store Address"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:background="@drawable/row_selector"/>
 
         </LinearLayout>
 

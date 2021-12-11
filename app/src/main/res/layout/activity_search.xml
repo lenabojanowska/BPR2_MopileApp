@@ -52,14 +52,23 @@
         android:text="Sweets"
         android:onClick="getSweetsProducts"/>-->
 
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:background="@drawable/sth">
+    </RelativeLayout>
+
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="34dp"
         android:text="  What are you looking for?"
         android:textSize="30dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
 
     <SearchView
         android:id="@+id/allProductsSearchView"
@@ -69,15 +78,15 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="7dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="81dp"
         android:layout_marginEnd="6dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/allProductsRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="553dp"
+        android:layout_height="544dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="125dp" />
+        android:layout_marginTop="134dp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

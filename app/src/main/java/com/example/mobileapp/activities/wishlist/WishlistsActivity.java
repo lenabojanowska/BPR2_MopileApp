@@ -3,6 +3,7 @@ package com.example.mobileapp.activities.wishlist;
 import static android.service.controls.ControlsProviderService.TAG;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
@@ -12,20 +13,25 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.InputType;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 import com.example.mobileapp.activities.main.NewsletterActivity;
 import com.example.mobileapp.R;
 import com.example.mobileapp.activities.basket.BasketActivity;
 import com.example.mobileapp.activities.profile.ProfileActivity;
 import com.example.mobileapp.activities.search.SearchActivity;
+import com.example.mobileapp.activities.storeProduct.StoreProductActivity;
 import com.example.mobileapp.activities.wishlist.adapter.WishlistAdapter;
+import com.example.mobileapp.connection.ServiceGenerator;
 import com.example.mobileapp.connection.apis.WishlistApi;
 import com.example.mobileapp.fragments.wishlist.AddWishlistFragment;
 import com.example.mobileapp.fragments.wishlist.WishlistFragment;
@@ -43,6 +49,9 @@ import java.util.List;
 import java.util.Timer;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class WishlistsActivity extends AppCompatActivity implements WishlistAdapter.OnWishlistListener {
 
@@ -63,9 +72,7 @@ public class WishlistsActivity extends AppCompatActivity implements WishlistAdap
 
     private FloatingActionButton floatingActionButton;
 
-    private int count = 0;
-    private boolean isActive;
-    Runnable refresh;
+    private String wishlistText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,8 +112,10 @@ public class WishlistsActivity extends AppCompatActivity implements WishlistAdap
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddWishlistFragment addWishlistFragment = new AddWishlistFragment();
-                addWishlistFragment.show(getSupportFragmentManager(), "addWishlist fragment");
+
+                wishlistAlertDialog(v);
+                /*AddWishlistFragment addWishlistFragment = new AddWishlistFragment();
+                addWishlistFragment.show(getSupportFragmentManager(), "addWishlist fragment");*/
             }
         });
 
@@ -141,6 +150,8 @@ public class WishlistsActivity extends AppCompatActivity implements WishlistAdap
                         startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         overridePendingTransition(0,0);
                         return true;
+
+
 
                     case R.id.wishlist:
 
@@ -204,6 +215,55 @@ public class WishlistsActivity extends AppCompatActivity implements WishlistAdap
         }
     };
 
+    public void wishlistAlertDialog(View view){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setMessage("Put the name of a new wishlist");
+        final EditText wishlistName = new EditText(WishlistsActivity.this);
+        wishlistName.setInputType(InputType.TYPE_CLASS_TEXT);
+        alert.setView(wishlistName);
+
+
+        alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                wishlistText = wishlistName.getText().toString();
+                firebaseAuth = FirebaseAuth.getInstance();
+                FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                String id = firebaseUser.getUid();
+
+                WishlistApi wishlistApi = ServiceGenerator.getWishListApi();
+                WishlistModel wishlistModel = new WishlistModel(wishlistText, id);
+
+                Call<WishlistModel> call = wishlistApi.postWishlist(wishlistModel);
+
+                call.enqueue(new Callback<WishlistModel>() {
+                    @Override
+                    public void onResponse(Call<WishlistModel> call, Response<WishlistModel> response) {
+                        Log.v("Tag", "--------//--------");
+                        Log.v("Tag", "Posting Wishlist");
+                        Log.v("Tag", "The Wishlist posted");
+                        Log.v("Tag", "The Wishlist " + response.body().getName());
+
+                        //mWishlist.setValue((List<WishlistModel>) response.body());
+                    }
+
+                    @Override
+                    public void onFailure(Call<WishlistModel> call, Throwable t) { Log.v("Tag", t.toString());
+                    }
+                });
+            }
+        });
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        alert.create().show();
+        AlertDialog alertDialog = alert.create();
+        alertDialog.getWindow().setLayout(200, 300);
+
+    }
 
 
 

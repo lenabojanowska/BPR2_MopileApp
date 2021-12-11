@@ -7,11 +7,26 @@
     android:layout_height="match_parent"
     tools:context=".activities.wishlist.WishlistsActivity"
     android:id="@+id/wishlistView">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:background="@drawable/sth">
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="34dp"
+        android:text="  Your wishlists"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/wishlistRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="683dp"
+        android:layout_height="600dp"
         android:layout_above="@+id/bottom_navigation"
         android:layout_marginBottom="-4dp" />
 

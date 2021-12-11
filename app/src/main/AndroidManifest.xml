@@ -55,6 +55,16 @@
             android:label=""
             android:theme="@style/Theme.MobileApp.NoActionBar" />
         <activity
+            android:name=".activities.review.ReviewActivity"
+            android:exported="false"
+            android:label=""
+            android:theme="@style/Theme.MobileApp.NoActionBar" />
+        <activity
+            android:name=".activities.storeProduct.StoreProductActivity"
+            android:exported="false"
+            android:label=""
+            android:theme="@style/Theme.MobileApp.NoActionBar" />
+        <activity
             android:name=".activities.firebase.LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.MobileApp.NoActionBar" >
