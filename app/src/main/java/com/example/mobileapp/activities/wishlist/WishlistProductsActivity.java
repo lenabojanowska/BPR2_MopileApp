@@ -1,6 +1,7 @@
 package com.example.mobileapp.activities.wishlist;
 
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -8,8 +9,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,11 +29,15 @@ import com.example.mobileapp.viewmodels.WishlistProductsViewModel;
 import com.example.mobileapp.viewmodels.WishlistViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WishlistProductsActivity extends AppCompatActivity {
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
+
+public class WishlistProductsActivity extends AppCompatActivity implements WishlistProductsAdapter.OnWishlistProductListener {
 
     BottomNavigationView bottomNavigationView;
     private RecyclerView recyclerView;
@@ -40,6 +47,8 @@ public class WishlistProductsActivity extends AppCompatActivity {
     private List<ProductModel> wishlistProductsList;
 
     private FloatingActionButton floatingActionButton;
+    private FirebaseAuth firebaseAuth;
+    private int wishlistId;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,12 +58,12 @@ public class WishlistProductsActivity extends AppCompatActivity {
         String name = intent.getStringExtra("name");
 
         String profileId = intent.getStringExtra("profileId");
-        int id = intent.getIntExtra("id", 0);
+        wishlistId = intent.getIntExtra("id", 0);
 
         recyclerView = (RecyclerView) findViewById(R.id.wishlistProductsRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new WishlistProductsAdapter(wishlistProductsList, this);
+        adapter = new WishlistProductsAdapter(wishlistProductsList, this, this);
         recyclerView.setAdapter(adapter);
         wishlistProductsList = new ArrayList<>();
 
@@ -68,10 +77,10 @@ public class WishlistProductsActivity extends AppCompatActivity {
                 }
             }
         });
-        wishlistProductsViewModel.GetProductsOnWishlist(id);
+        wishlistProductsViewModel.GetProductsOnWishlist(wishlistId);
 
         //Toast.makeText(this, "name: " + name, Toast.LENGTH_LONG).show();
-        Toast.makeText(this, "id: " + id, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "id: " + wishlistId, Toast.LENGTH_LONG).show();
 
         floatingActionButton = findViewById(R.id.floatingActionButton2);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +90,9 @@ public class WishlistProductsActivity extends AppCompatActivity {
                 startActivity(intent1);
             }
         });
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchHelperCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         //set home selected
@@ -122,7 +134,57 @@ public class WishlistProductsActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+
     }
+
+
+    @Override
+    public void onWishlistProductListener(int position) {
+
+
+    }
+
+    ProductModel deletedOnWishlistProduct = null;
+
+    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+            firebaseAuth = FirebaseAuth.getInstance();
+            FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+            String uid = firebaseUser.getUid();
+
+            int position = viewHolder.getAdapterPosition();
+            long productId = wishlistProductsList.get(position).getId();
+            String name = wishlistProductsList.get(position).getName();
+
+
+            switch (direction){
+                case ItemTouchHelper.LEFT:
+                    deletedOnWishlistProduct = wishlistProductsList.get(position);
+                    wishlistProductsList.remove(position);
+                    adapter.notifyItemRemoved(position);
+                   // WishlistModel wishlistModel = new WishlistModel(name, profileId);
+                    wishlistProductsViewModel.deleteProductOnWishlist(wishlistId, productId);
+
+                    break;
+            }
+        }
+
+        @Override
+        public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+            new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                    .addSwipeLeftBackgroundColor(ContextCompat.getColor(WishlistProductsActivity.this, R.color.teal_200)).create().decorate();
+
+            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+        }
+    };
 
 
 }

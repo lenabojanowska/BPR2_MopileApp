@@ -210,7 +210,7 @@ public class WishlistsActivity extends AppCompatActivity implements WishlistAdap
         @Override
         public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
             new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-                    .addSwipeLeftBackgroundColor(ContextCompat.getColor(WishlistsActivity.this, R.color.colorAccent)).create().decorate();
+                    .addSwipeLeftBackgroundColor(ContextCompat.getColor(WishlistsActivity.this, R.color.teal_200)).addSwipeLeftLabel("Delete").addSwipeLeftActionIcon(android.R.drawable.ic_menu_delete).create().decorate();
 
             super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
         }
@@ -262,7 +262,7 @@ public class WishlistsActivity extends AppCompatActivity implements WishlistAdap
         });
         alert.create().show();
         AlertDialog alertDialog = alert.create();
-        alertDialog.getWindow().setLayout(200, 300);
+        alertDialog.getWindow().setLayout(300, 300);
 
     }
 

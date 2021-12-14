@@ -6,6 +6,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
@@ -31,6 +32,9 @@ public interface ProductApi {
 
     @GET("barcode/{barcode}")
     Call<ProductModel> getProductByBarcode(@Path("barcode") long barcode);
+
+    @DELETE("wishListProducts/{wishListId}/{productId}")
+    Call<Void> deleteProductOnWishlist(@Path("wishListId") long id, @Path("productId") long productId);
 
 
 

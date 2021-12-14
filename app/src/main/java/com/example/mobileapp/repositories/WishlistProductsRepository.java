@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.mobileapp.connection.ServiceGenerator;
 import com.example.mobileapp.connection.apis.ProductApi;
+import com.example.mobileapp.connection.apis.WishlistApi;
 import com.example.mobileapp.models.ProductModel;
 
 import java.util.List;
@@ -53,6 +54,23 @@ public class WishlistProductsRepository {
             @Override
             public void onFailure(Call<List<ProductModel>> call, Throwable t) {
                 Log.v("Tag", "helplololkjh"+t.toString());
+            }
+        });
+
+    }
+
+    public void deleteProductOnWishlist(long id, long productId){
+        ProductApi productApi = ServiceGenerator.getProductApi();
+        Call<Void> call = productApi.deleteProductOnWishlist(id,productId);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Log.v("Tag", "Deleted " + response.code());
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
             }
         });
 

@@ -19,9 +19,12 @@ public class WishlistProductsAdapter extends RecyclerView.Adapter<WishlistProduc
     private List<ProductModel> productList;
     private Context context;
 
-    public WishlistProductsAdapter(List<ProductModel> productList, Context context){
+    private OnWishlistProductListener onWishlistProductListener;
+
+    public WishlistProductsAdapter(List<ProductModel> productList, Context context, OnWishlistProductListener onWishlistProductListener){
         this.productList = productList;
         this.context = context;
+        this.onWishlistProductListener = onWishlistProductListener;
     }
 
     public void setWishlistList(List<ProductModel> productList){
@@ -33,7 +36,7 @@ public class WishlistProductsAdapter extends RecyclerView.Adapter<WishlistProduc
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.wishlist_product_item, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, onWishlistProductListener);
     }
 
     @Override
@@ -50,24 +53,32 @@ public class WishlistProductsAdapter extends RecyclerView.Adapter<WishlistProduc
         return 0;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public TextView productName, wishlistItemPrice;
-        //WishlistAdapter.OnWishlistListener onWishlistListener;
+        OnWishlistProductListener onWishlistProductListener;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, OnWishlistProductListener onWishlistProductListener) {
             super(itemView);
             productName = (TextView)  itemView.findViewById(R.id.productOnWishlistName);
             wishlistItemPrice = (TextView) itemView.findViewById(R.id.wishlistItemPrice);
-            //this.onWishlistListener = onWishlistListener;
+            this.onWishlistProductListener = onWishlistProductListener;
 
-           // itemView.setOnClickListener(this);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            onWishlistProductListener.onWishlistProductListener(getAdapterPosition());
         }
 
        /* @Override
         public void onClick(View v) {
             onWishlistListener.onWishlistClick(getAdapterPosition());
         }*/
+    }
+    public interface OnWishlistProductListener{
+        void onWishlistProductListener(int position);
     }
 }
 

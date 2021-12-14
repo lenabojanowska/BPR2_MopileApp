@@ -23,4 +23,8 @@ public class WishlistProductsViewModel extends ViewModel {
     public void GetProductsOnWishlist(int wishlistId){
         wishlistProductsRepository.GetProductsOnWishlist(wishlistId);
     }
+
+    public void deleteProductOnWishlist(long id, long productId){
+        wishlistProductsRepository.deleteProductOnWishlist(id,productId);
+    }
 }
