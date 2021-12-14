@@ -21,7 +21,6 @@ import com.example.mobileapp.activities.basket.BasketActivity;
 import com.example.mobileapp.activities.main.adapter.NewsletterAdapter;
 import com.example.mobileapp.activities.profile.ProfileActivity;
 import com.example.mobileapp.activities.search.SearchActivity;
-import com.example.mobileapp.activities.storeProduct.StoreProductActivity;
 import com.example.mobileapp.activities.wishlist.WishlistsActivity;
 import com.example.mobileapp.activities.wishlist.adapter.WishlistAdapter;
 import com.example.mobileapp.databinding.ActivityMainBinding;
@@ -50,7 +49,7 @@ public class NewsletterActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
 
-    private TextView usernameTextView;
+    private TextView usernameTextView, newsletterName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +59,7 @@ public class NewsletterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         usernameTextView = findViewById(R.id.usernameText);
+        newsletterName = findViewById(R.id.omg);
 
         firebaseAuth = FirebaseAuth.getInstance();
         checkUser();
@@ -69,7 +69,8 @@ public class NewsletterActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new NewsletterAdapter(newsletterList, this);
         recyclerView.setAdapter(adapter);
-        newsletterList = new ArrayList<>();
+        //newsletterList = new ArrayList<>();
+
 
         newsletterViewModel = ViewModelProviders.of(this).get(NewsletterViewModel.class);
         newsletterViewModel.getNewsletters().observe(this, new Observer<List<NewsletterModel>>() {
@@ -78,6 +79,7 @@ public class NewsletterActivity extends AppCompatActivity {
                 if(newsletterModels != null){
                     newsletterList = newsletterModels;
                     adapter.setNewsletterList(newsletterModels);
+
                 }
             }
         });

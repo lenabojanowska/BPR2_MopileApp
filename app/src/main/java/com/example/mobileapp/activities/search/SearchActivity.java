@@ -22,14 +22,17 @@ import com.example.mobileapp.R;
 import com.example.mobileapp.activities.basket.BasketActivity;
 import com.example.mobileapp.activities.product.ProductActivity;
 import com.example.mobileapp.activities.profile.ProfileActivity;
-import com.example.mobileapp.activities.storeProduct.StoreProductActivity;
+
 import com.example.mobileapp.activities.wishlist.WishlistProductsActivity;
 import com.example.mobileapp.activities.wishlist.WishlistsActivity;
 import com.example.mobileapp.activities.search.adapter.SearchAdapter;
+import com.example.mobileapp.fragments.store.StoreFragment;
+import com.example.mobileapp.fragments.storeProduct.StoreProductFragment;
 import com.example.mobileapp.fragments.wishlist.WishlistFragment;
 import com.example.mobileapp.models.ProductModel;
 import com.example.mobileapp.viewmodels.AllProductsViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,11 +50,15 @@ public class SearchActivity extends AppCompatActivity implements SearchAdapter.O
     private List<ProductModel> productList;
     private SearchView searchView;
 
+    private FloatingActionButton floatingActionButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        floatingActionButton = findViewById(R.id.storeFloatingActionButton);
 
         searchView = findViewById(R.id.allProductsSearchView);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -89,9 +96,15 @@ public class SearchActivity extends AppCompatActivity implements SearchAdapter.O
         allProductsViewModel.GetAllProducts();
 
 
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StoreProductFragment storeFragment = new StoreProductFragment();
 
+                storeFragment.show(getSupportFragmentManager(), "store fragment");
+            }
+        });
 
-        //Toast.makeText(this, "name: " + name, Toast.LENGTH_LONG).show();
 
         //initialize and assign variable
         bottomNavigationView = findViewById(R.id.bottom_navigation);

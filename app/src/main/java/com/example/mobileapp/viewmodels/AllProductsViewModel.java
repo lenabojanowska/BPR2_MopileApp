@@ -24,4 +24,8 @@ public class AllProductsViewModel extends ViewModel {
     public void GetAllProducts(){
         allProductsRepository.getAllProducts();
     }
+
+    public void getProductsOnStore(long id){
+        allProductsRepository.getProductsOnStore(id);
+    }
 }

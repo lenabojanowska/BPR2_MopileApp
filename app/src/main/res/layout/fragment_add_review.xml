@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,35 +8,16 @@
     tools:context=".fragments.profile.review.AddReviewFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="16dp"
-        android:text="  Create Review"
-        android:textSize="30dp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="68dp"
-        android:text="   Store"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/reviewCard"
-        android:layout_width="376dp"
-        android:layout_height="149dp"
-        android:layout_marginTop="100dp"
+        android:layout_width="378dp"
+        android:layout_height="109dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="17dp">
@@ -44,68 +25,85 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/storeReviewRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="111dp" />
 
 
     </androidx.cardview.widget.CardView>
-
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="25dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="256dp"
+        android:layout_marginTop="180dp"
         android:text="   Rating"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp"
-        />
-
-    <NumberPicker
-        android:id="@+id/numberPicker"
-        android:layout_width="374dp"
-        android:layout_height="63dp"
-        android:layout_marginTop="288dp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="19dp" />
+        tools:layout_editor_absoluteX="0dp" />
 
     <TextView
         android:id="@+id/commentTextView"
         android:layout_width="match_parent"
         android:layout_height="25dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="352dp"
+        android:layout_marginTop="292dp"
         android:text="   Comment"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="0dp" />
 
-    <EditText
-        android:id="@+id/editTextView"
-        android:layout_width="378dp"
-        android:layout_height="32dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="384dp"
-
-        android:textSize="20dp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="15dp" />
-
     <Button
         android:id="@+id/addReviewButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="464dp"
-        android:layout_marginEnd="152dp"
-        android:backgroundTint="#009688"
+        android:layout_width="105dp"
+        android:layout_height="47dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="115dp"
+        android:layout_marginTop="360dp"
+        android:layout_marginEnd="117dp"
+        android:layout_marginBottom="195dp"
+        android:backgroundTint="@color/teal_200"
         android:text="add review"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
+    <NumberPicker
+        android:id="@+id/numberPicker"
+        android:layout_width="374dp"
+        android:layout_height="63dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="216dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="21dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <EditText
+        android:id="@+id/editTextView"
+        android:layout_width="378dp"
+        android:layout_height="32dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+
+        android:layout_marginTop="328dp"
+        android:layout_marginBottom="242dp"
+        android:textSize="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="17dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:text="   Choose a store"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+
+</RelativeLayout>

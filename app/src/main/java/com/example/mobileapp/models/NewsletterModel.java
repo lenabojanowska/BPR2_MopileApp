@@ -5,13 +5,34 @@ import java.util.Date;
 public class NewsletterModel {
 
     private int id;
-    private String Title;
-    private String Details;
+    private String title;
+    private String details;
+    private long validFromMiliseconds;
+    private long validToMiliseconds;
 
-    public NewsletterModel(int id, String title, String details) {
+
+    public NewsletterModel(int id, String title, String details, long validFromMiliseconds, long validToMiliseconds) {
         this.id = id;
-        Title = title;
-        Details = details;
+        this.title = title;
+        this.details = details;
+        this.validFromMiliseconds = validFromMiliseconds;
+        this.validToMiliseconds = validToMiliseconds;
+    }
+
+    public long getValidFromMiliseconds() {
+        return validFromMiliseconds;
+    }
+
+    public void setValidFromMiliseconds(long validFromMiliseconds) {
+        this.validFromMiliseconds = validFromMiliseconds;
+    }
+
+    public long getValidToMiliseconds() {
+        return validToMiliseconds;
+    }
+
+    public void setValidToMiliseconds(long validToMiliseconds) {
+        this.validToMiliseconds = validToMiliseconds;
     }
 
     public int getId() {
@@ -23,18 +44,18 @@ public class NewsletterModel {
     }
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public void setTitle(String title) {
-        Title = title;
+        title = title;
     }
 
     public String getDetails() {
-        return Details;
+        return details;
     }
 
     public void setDetails(String details) {
-        Details = details;
+        details = details;
     }
 }

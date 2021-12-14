@@ -39,6 +39,7 @@ public class WishlistProductsAdapter extends RecyclerView.Adapter<WishlistProduc
     @Override
     public void onBindViewHolder(@NonNull WishlistProductsAdapter.ViewHolder holder, int position) {
         holder.productName.setText(this.productList.get(position).getName());
+        holder.wishlistItemPrice.setText(String.valueOf(productList.get(position).getPrice()));
     }
 
     @Override
@@ -51,12 +52,13 @@ public class WishlistProductsAdapter extends RecyclerView.Adapter<WishlistProduc
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView productName;
+        public TextView productName, wishlistItemPrice;
         //WishlistAdapter.OnWishlistListener onWishlistListener;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             productName = (TextView)  itemView.findViewById(R.id.productOnWishlistName);
+            wishlistItemPrice = (TextView) itemView.findViewById(R.id.wishlistItemPrice);
             //this.onWishlistListener = onWishlistListener;
 
            // itemView.setOnClickListener(this);

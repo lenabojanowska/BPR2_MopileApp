@@ -23,13 +23,13 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.mobileapp.activities.main.NewsletterActivity;
 import com.example.mobileapp.R;
 import com.example.mobileapp.activities.basket.BasketActivity;
 import com.example.mobileapp.activities.profile.ProfileActivity;
 import com.example.mobileapp.activities.search.SearchActivity;
-import com.example.mobileapp.activities.storeProduct.StoreProductActivity;
 import com.example.mobileapp.activities.wishlist.adapter.WishlistAdapter;
 import com.example.mobileapp.connection.ServiceGenerator;
 import com.example.mobileapp.connection.apis.WishlistApi;
@@ -80,6 +80,7 @@ public class WishlistsActivity extends AppCompatActivity implements WishlistAdap
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wishlists);
+
 
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();

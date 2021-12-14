@@ -6,12 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.basket.BasketActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="32dp"
-        android:background="@drawable/sth">
-    </RelativeLayout>
-    <!-- <Button
+        android:layout_height="676dp">
+
+
+        <!-- <Button
         android:id="@+id/scanButton"
         android:layout_width="113dp"
         android:layout_height="wrap_content"
@@ -24,12 +25,104 @@
         android:text="Scan" />-->
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/basketRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="496dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="34dp"></androidx.recyclerview.widget.RecyclerView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/sth">
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="31dp">
+
+            <TextView
+                android:id="@+id/basketStoreName"
+                android:layout_width="227dp"
+                android:layout_height="match_parent"
+                android:text="Store"
+                android:textColor="@color/black"
+                android:textSize="35dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/searchStore"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="11dp"
+                android:backgroundTint="@color/teal_200"
+                android:text="Choose a store" />
+
+
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/basketsth"
+            android:layout_width="match_parent"
+            android:layout_height="370dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="98dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <!--<androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+
+            android:layout_below="@+id/basketsth"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="21dp">
+
+            <TextView
+                android:layout_width="202dp"
+                android:layout_height="37dp"
+                android:layout_below="@+id/price_layout"
+                android:layout_alignBottom="@+id/basketRecyclerView"
+                android:layout_gravity="left"
+                android:layout_marginTop="-2dp"
+                android:layout_marginBottom="74dp"
+                android:text="Total Cost" />
+
+            <TextView
+                android:id="@+id/finalPriceTextView"
+                android:layout_width="199dp"
+                android:layout_height="35dp"
+                android:layout_gravity="right"
+                android:text="000" />
+
+
+        </androidx.cardview.widget.CardView>-->
+
+        <Button
+            android:id="@+id/buyButton"
+            android:layout_width="317dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="41dp"
+            android:layout_marginTop="612dp"
+            android:layout_marginEnd="53dp"
+            android:text="BUY"
+            android:backgroundTint="@color/teal_200"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/scanFloatingButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="537dp"
+            android:layout_marginEnd="50dp"
+            android:clickable="true"
+            app:srcCompat="@drawable/empty" />
+        <!--android:onClick="getProd"-->
+    </RelativeLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -41,46 +134,5 @@
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
         app:menu="@menu/menu_navigation" />
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="62dp"
-
-        android:layout_below="@+id/basketRecyclerView"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="21dp">
-
-        <TextView
-            android:layout_width="202dp"
-            android:layout_height="37dp"
-            android:layout_below="@+id/price_layout"
-            android:layout_alignBottom="@+id/basketRecyclerView"
-            android:layout_gravity="left"
-            android:layout_marginTop="-2dp"
-            android:layout_marginBottom="74dp"
-            android:text="Total Cost" />
-
-        <TextView
-            android:text="000"
-            android:id="@+id/finalPriceTextView"
-            android:layout_width="199dp"
-            android:layout_height="35dp"
-            android:layout_gravity="right" />
-
-
-    </androidx.cardview.widget.CardView>
-
-    <Button
-        android:id="@+id/buyButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/bottom_navigation"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="13dp"
-        android:text="BUY"/>
-
 
 </RelativeLayout>

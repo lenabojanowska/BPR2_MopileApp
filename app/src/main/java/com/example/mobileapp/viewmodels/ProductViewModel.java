@@ -16,12 +16,16 @@ public class ProductViewModel extends ViewModel {
         productRepository = ProductRepository.getInstance();
     }
 
-    public LiveData<List<ProductModel>> getProductListByCat(){
-        return productRepository.getProductListByCat();
+    public LiveData<ProductModel> getProductById(){
+        return productRepository.getProductListById();
     }
 
-    public void GetProductListByCategory(long id){
-        productRepository.getProductListByCategory(id);
+    public void getProductById(long id){
+        productRepository.getProductById(id);
+    }
+
+    public void getProductByBarcode(long barcode){
+        productRepository.getProductByBarcode(barcode);
     }
 
 }

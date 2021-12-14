@@ -7,12 +7,21 @@
     android:layout_height="match_parent"
     tools:context=".activities.scan.ScanActivity">
 
+    <androidx.appcompat.widget.Toolbar
+    android:id="@+id/toolbarScanner"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_marginTop="3dp"
+    android:background="@color/white"
+    android:minHeight="?attr/actionBarSize" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:itemBackground="@color/purple_200"
+        app:itemBackground="@color/teal_200"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,7 +30,9 @@
     <com.budiyev.android.codescanner.CodeScannerView
         android:id="@+id/scanner_view"
         android:layout_width="match_parent"
-        android:layout_height="674dp"
+        android:layout_height="615dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="57dp"
         app:autoFocusButtonColor="@android:color/white"
         app:flashButtonColor="@android:color/white"
         app:frameAspectRatioHeight="1"

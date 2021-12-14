@@ -21,7 +21,7 @@ public class ProductRepository {
 
     private static ProductRepository instance;
 
-    private final MutableLiveData<List<ProductModel>> mProduct;
+    private final MutableLiveData<ProductModel> mProduct;
 
     public static ProductRepository getInstance(){
         if(instance == null) {
@@ -34,27 +34,56 @@ public class ProductRepository {
         mProduct = new MutableLiveData<>();
     }
 
-    public LiveData<List<ProductModel>> getProductListByCat(){
+    public LiveData<ProductModel> getProductListById(){
         return mProduct;
     }
 
-    public void getProductListByCategory(long id){
+    public void getProductById(long id){
         ProductApi productApi = ServiceGenerator.getProductApi();
-        Call<List<ProductModel>> call = productApi.getProductListByCategory(id);
-        call.enqueue(new Callback<List<ProductModel>>() {
+        Call<ProductModel> call = productApi.getProductById(id);
+        call.enqueue(new Callback<ProductModel>() {
             @Override
-            public void onResponse(Call<List<ProductModel>> call, Response<List<ProductModel>> response) {
+            public void onResponse(Call<ProductModel> call, Response<ProductModel> response) {
                if(response.isSuccessful()){
                    mProduct.setValue(response.body());
+                   String name = response.body().getName();
+                   Log.v("Tag", "name  " + name);
+
+                   Log.v("Tag", "Successful " + response.body());
                }else{
                    Log.v("Tag", "Errorsaasxasas " + response.errorBody());
                }
             }
 
             @Override
-            public void onFailure(Call<List<ProductModel>> call, Throwable t) {
-
+            public void onFailure(Call<ProductModel> call, Throwable t) {
+                Log.v("Tag", t.toString() + "Errorsaasxasas " );
             }
         });
     }
+
+    public void getProductByBarcode(long barcode){
+        ProductApi productApi = ServiceGenerator.getProductApi();
+        Call<ProductModel> call = productApi.getProductByBarcode(barcode);
+        call.enqueue(new Callback<ProductModel>() {
+            @Override
+            public void onResponse(Call<ProductModel> call, Response<ProductModel> response) {
+                if(response.isSuccessful()){
+                    mProduct.setValue(response.body());
+                    String name = response.body().getName();
+                    Log.v("Tag", "name  " + name);
+
+                    Log.v("Tag", "Successful " + response.body());
+                }else{
+                    Log.v("Tag", "Errorsaasxasas " + response.errorBody());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProductModel> call, Throwable t) {
+                Log.v("Tag", t.toString() + "Errorsaasxasas " );
+            }
+        });
+    }
+
 }

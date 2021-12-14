@@ -1,6 +1,14 @@
 package com.example.mobileapp.models;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "product_table")
 public class ProductModel {
+
+    @PrimaryKey(autoGenerate = true)
+    private int pId;
 
     private long id;
     private long barcode;
@@ -9,10 +17,6 @@ public class ProductModel {
     private double price;
     private String brand;
 
-    public ProductModel(String category) {
-        this.category = category;
-    }
-
     public ProductModel(long id, long barcode, String name, String category, double price, String brand) {
         this.id = id;
         this.barcode = barcode;
@@ -20,6 +24,14 @@ public class ProductModel {
         this.category = category;
         this.price = price;
         this.brand = brand;
+    }
+
+    public int getPId() {
+        return pId;
+    }
+
+    public void setPId(int pId) {
+        this.pId = pId;
     }
 
     public long getId() {

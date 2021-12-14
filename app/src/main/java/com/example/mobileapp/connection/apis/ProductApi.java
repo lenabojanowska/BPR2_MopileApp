@@ -14,17 +14,25 @@ import retrofit2.http.Query;
 
 public interface ProductApi {
 
-    @GET("Products/{id}")
-    Call<List<ProductModel>> getProductListByCategory(@Query("id") long id);
+    @GET("api/Products/{id}")
+    Call<ProductModel> getProductById(@Path("id") long id);
 
-    @GET("wishListProducts")
-    Call<List<ProductModel>> getProductsOnWishlist(@Query("wishListId") long wishlistId);
+    @GET("wishListProducts/{wishListId}")
+    Call<List<ProductModel>> getProductsOnWishlist(@Path("wishListId") long wishlistId);
 
     @GET("api/Products")
     Call<List<ProductModel>> getProducts();
 
     @POST("wishListProducts/{wishListId}/{productId}")
     Call<ProductModel> postProductOnWishlist(@Path("wishListId") int wishlistId, @Path("productId") long productId, @Body ProductModel productModel);
+
+    @GET("storeProducts/{storeId}")
+    Call<List<ProductModel>> getProductsOnStore(@Path("storeId") long storeId);
+
+    @GET("barcode/{barcode}")
+    Call<ProductModel> getProductByBarcode(@Path("barcode") long barcode);
+
+
 
 
 }

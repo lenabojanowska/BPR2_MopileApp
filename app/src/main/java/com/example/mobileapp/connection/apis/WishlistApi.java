@@ -17,8 +17,8 @@ public interface WishlistApi {
     @GET("Wishlists")
     Call<List<WishlistModel>> getWishList();
 
-    @GET("customerWishLists")
-    Call<List<WishlistModel>> getWishListsByCustomerID(@Query("customerId") String profileId);
+    @GET("customerWishLists/{customerId}")
+    Call<List<WishlistModel>> getWishListsByCustomerID(@Path("customerId") String profileId);
 
     @POST("api/Wishlists")
     Call<WishlistModel> postWishlist(@Body WishlistModel wishlistModel);

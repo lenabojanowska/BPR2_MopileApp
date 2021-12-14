@@ -105,7 +105,7 @@ public class AddReviewFragment extends Fragment implements StoreAdapter.OnStoreL
             public void onClick(View v) {
                 String text = comment.getText().toString();
 
-                reviewViewModel.postReview(username, value, text, "storeName");
+                //reviewViewModel.postReview(username, value, text, "storeName");
                 ReviewApi reviewApi = ServiceGenerator.getReviewApi();
                 ReviewModel reviewModel = new ReviewModel(username, value, text, storeName);
                 Call<ReviewModel> call = reviewApi.postReview(reviewModel);

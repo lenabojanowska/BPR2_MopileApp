@@ -21,7 +21,7 @@ import com.example.mobileapp.R;
 import com.example.mobileapp.activities.basket.BasketActivity;
 import com.example.mobileapp.activities.review.ReviewActivity;
 import com.example.mobileapp.activities.search.SearchActivity;
-import com.example.mobileapp.activities.storeProduct.StoreProductActivity;
+
 import com.example.mobileapp.activities.wishlist.WishlistsActivity;
 
 import com.example.mobileapp.fragments.wishlist.WishlistFragment;
@@ -35,7 +35,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
 
-    private TextView logout, delete, review;
+    private TextView logout, delete, review, user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +48,7 @@ public class ProfileActivity extends AppCompatActivity {
         logout = findViewById(R.id.logoutTextView);
         delete = findViewById(R.id.deleteAccountTextView);
         review = findViewById(R.id.reviewTextView);
+        user = findViewById(R.id.username);
 
         firebaseAuth = FirebaseAuth.getInstance();
         checkUser();
@@ -119,6 +120,9 @@ public class ProfileActivity extends AppCompatActivity {
             startActivity(new Intent(this, ProfileActivity.class));
             finish();
         }else{
+
+            String username = firebaseUser.getEmail();
+            user.setText(username);
 
         }
     }

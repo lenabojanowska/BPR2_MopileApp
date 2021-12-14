@@ -59,5 +59,26 @@ public class AllProductsRepository {
             });
         }
 
+    public void getProductsOnStore(long id){
+        ProductApi productApi = ServiceGenerator.getProductApi();
+        Call<List<ProductModel>> call = productApi.getProductsOnStore(id);
+        call.enqueue(new Callback<List<ProductModel>>() {
+            @Override
+            public void onResponse(Call<List<ProductModel>> call, Response<List<ProductModel>> response) {
+                if(response.isSuccessful()){
+                    mProducts.setValue(response.body());
+                }else{
+                    Log.v("Tag", "Errorsaasxasas " + response.errorBody());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ProductModel>> call, Throwable t) {
+
+            }
+        });
+    }
+
+
 
 }

@@ -1,4 +1,4 @@
-package com.example.mobileapp.fragments.store;
+package com.example.mobileapp.fragments.storeProduct;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,21 +20,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mobileapp.R;
-import com.example.mobileapp.activities.basket.BasketActivity;
 import com.example.mobileapp.activities.product.ProductActivity;
 import com.example.mobileapp.activities.search.SearchActivity;
 
+import com.example.mobileapp.activities.storeProduct.StoreProductActivity;
 import com.example.mobileapp.fragments.store.adapter.StoreAdapter;
 import com.example.mobileapp.fragments.storeProduct.StoreProductFragment;
 import com.example.mobileapp.models.StoreModel;
 import com.example.mobileapp.viewmodels.StoreViewModel;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class StoreFragment extends DialogFragment  implements  StoreAdapter.OnStoreListener{
+public class StoreProductFragment extends DialogFragment  implements  StoreAdapter.OnStoreListener{
 
     private StoreViewModel storeViewModel;
 
@@ -55,8 +53,6 @@ public class StoreFragment extends DialogFragment  implements  StoreAdapter.OnSt
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-
 
         /*AllFragment allFragment = new AllFragment();
         allFragment.setArguments(bundle);
@@ -88,9 +84,13 @@ public class StoreFragment extends DialogFragment  implements  StoreAdapter.OnSt
     @Override
     public void onStoreClick(int position) {
         String storeName = storeList.get(position).getName();
-        Intent intent = new Intent(this.getActivity(), BasketActivity.class);
-        intent.putExtra("storeBasketName", storeName);
-        startActivity(intent);
         Toast.makeText(this.getActivity(), storeName, Toast.LENGTH_LONG).show();
+
+        Intent intent = new Intent(StoreProductFragment.this.getActivity(), StoreProductActivity.class);
+        intent.putExtra("storeId", storeList.get(position).getId());
+        intent.putExtra("storeName", storeList.get(position).getName());
+        intent.putExtra("storeAddress", storeList.get(position).getAddress());
+        startActivity(intent);
+
     }
 }

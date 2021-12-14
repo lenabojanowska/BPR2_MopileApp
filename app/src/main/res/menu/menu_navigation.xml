@@ -14,7 +14,7 @@
     <item
         android:id="@+id/basket"
         android:title="Basket"
-        android:icon="@drawable/empty"/>
+        android:icon="@drawable/basket" />
 
     <item
         android:id="@+id/wishlist"

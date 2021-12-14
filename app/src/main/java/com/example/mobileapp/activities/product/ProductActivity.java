@@ -30,6 +30,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class ProductActivity extends AppCompatActivity {
 
     private TextView pName, pCategory, pBrand, pPrice;
+
     BottomNavigationView bottomNavigationView;
 
     Toolbar toolbar;
@@ -42,6 +43,48 @@ public class ProductActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
+
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        //set home selected
+        bottomNavigationView.setSelectedItemId(R.id.wishlist);
+        //perform ItemSelectedListener
+        bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.search:
+                        startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.home:
+                        startActivity(new Intent(getApplicationContext(), NewsletterActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.wishlist:
+                        startActivity(new Intent(getApplicationContext(), WishlistsActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.profile:
+                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.basket:
+                        startActivity(new Intent(getApplicationContext(), BasketActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+
+
+
+                }
+                return false;
+            }
+        });
+
         pName = findViewById(R.id.productNameTextView);
         pCategory = findViewById(R.id.productCategoryTextView);
         pBrand = findViewById(R.id.productBrandTextView);
@@ -73,8 +116,6 @@ public class ProductActivity extends AppCompatActivity {
         pCategory.setText(category);
         pBrand.setText(brand);
         pPrice.setText(String.valueOf(price));
-
-        //Toast.makeText(this, "id: " + id, Toast.LENGTH_LONG).show();
 
 
     }

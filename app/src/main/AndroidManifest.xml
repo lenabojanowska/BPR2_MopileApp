@@ -43,7 +43,8 @@
             android:name=".activities.scan.ScanActivity"
             android:exported="false"
             android:label="ScanActivity"
-            android:theme="@style/Theme.MobileApp.NoActionBar" />
+            android:theme="@style/Theme.MobileApp.NoActionBar"
+            />
         <activity
             android:name=".activities.main.NewsletterActivity"
             android:exported="false"
