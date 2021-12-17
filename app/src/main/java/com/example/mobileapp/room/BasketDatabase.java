@@ -37,18 +37,4 @@ public abstract class BasketDatabase extends RoomDatabase {
         }
     };
 
-    private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void>{
-        private ProductDao productDao;
-
-        private PopulateDbAsyncTask(BasketDatabase db){
-            productDao = db.productDao();
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-
-            return null;
-        }
-    }
-
 }

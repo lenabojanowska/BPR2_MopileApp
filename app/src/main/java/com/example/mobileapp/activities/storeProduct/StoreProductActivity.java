@@ -156,15 +156,6 @@ public class StoreProductActivity extends AppCompatActivity implements StoreProd
         intent.putExtra("pId", productList.get(position).getId());
         intent.putExtra("pBarcode", productList.get(position).getBarcode());
 
-        /*WishlistFragment fragment = new WishlistFragment();
-        Bundle bundle = new Bundle();
-        bundle.putLong("wId", productList.get(position).getId());
-        bundle.putLong("wBarcode", productList.get(position).getBarcode());
-        bundle.putString("wName", productList.get(position).getName());
-        bundle.putString("wCat", productList.get(position).getCategory());
-        bundle.putDouble("wPrice", productList.get(position).getPrice());
-        bundle.putString("wBrand", productList.get(position).getBrand());
-        fragment.setArguments(bundle);*/
 
         startActivity(intent);
 

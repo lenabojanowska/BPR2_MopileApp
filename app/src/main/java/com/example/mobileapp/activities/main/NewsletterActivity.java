@@ -135,7 +135,7 @@ public class NewsletterActivity extends AppCompatActivity {
             Log.d(TAG, "email on Main Activity " + email);
 
             usernameTextView.setText(email);
-            //binding.emailTextView.setText(email);
+
         }
     }
 }

@@ -73,13 +73,6 @@ public class WishlistFragment extends DialogFragment implements WishlistAdapter.
         String id = firebaseUser.getUid();
 
 
-       /* long wId = getArguments().getLong("wId", 2);
-        long wBarcode = getArguments().getLong("wBarcode", 2);
-        String wName = getArguments().getString("wName");
-        String wCat = getArguments().getString("wCat");
-        double wPrice = getArguments().getDouble("wPrice", 0);
-        String wBrand = getArguments().getString("wBrand");*/
-
         recyclerView = (RecyclerView) view.findViewById(R.id.wishlistDialogRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
@@ -136,32 +129,6 @@ public class WishlistFragment extends DialogFragment implements WishlistAdapter.
         });
 
 
-/*
-        int id = wishlistList.get(position).getId();
-
-        ProductApi productApi = ServiceGenerator.getProductApi();
-        ProductModel productModel = new ProductModel(wId, wBarcode, wName, wCat, wPrice, wBrand);
-        Call<ProductModel> call = productApi.postProductOnWishlist(id, wId, productModel);
-
-        call.enqueue(new Callback<ProductModel>() {
-            @Override
-            public void onResponse(Call<ProductModel> call, Response<ProductModel> response) {
-                Log.v("Tag", "Product added " + response.body().getName());
-            }
-
-            @Override
-            public void onFailure(Call<ProductModel> call, Throwable t) {
-                Log.v("Tag", "Error adding "+ t.toString());
-            }
-        });*/
-/*
-
-        Toast.makeText(this.getActivity(), "id: " + pId, Toast.LENGTH_LONG).show();
-        ProductApi productApi = ServiceGenerator.getProductApi();
-        ProductModel productModel = new ProductModel(wId, pId);
-        Call<ProductModel> call = productApi.postProductOnWishlist(wId, pId, );
-*/
-
     }
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
@@ -170,35 +137,7 @@ public class WishlistFragment extends DialogFragment implements WishlistAdapter.
         }
         return super.onOptionsItemSelected(item);
     }
-   /* @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        if(item.getItemId() == android.R.id.home){
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
-
-    /*WishlistApi wishlistApi = ServiceGenerator.getWishListApi();
-    WishlistModel wishlistModel = new WishlistModel(name, id);
-
-    Call<WishlistModel> call = wishlistApi.postWishlist(wishlistModel);
-
-                call.enqueue(new Callback<WishlistModel>() {
-        @Override
-        public void onResponse(Call<WishlistModel> call, Response<WishlistModel> response) {
-            Log.v("Tag", "--------//--------");
-            Log.v("Tag", "Posting Wishlist");
-            Log.v("Tag", "The Wishlist posted");
-            Log.v("Tag", "The Wishlist " + response.body().getName());
-
-            //mWishlist.setValue((List<WishlistModel>) response.body());
-        }
-
-        @Override
-        public void onFailure(Call<WishlistModel> call, Throwable t) { Log.v("Tag", t.toString());
-        }
-    });*/
 
 }
 

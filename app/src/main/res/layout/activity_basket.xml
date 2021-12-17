@@ -96,7 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="410dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="89dp">
+            android:layout_marginTop="121dp">
 
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -123,6 +123,16 @@
             android:layout_marginEnd="48dp"
             android:clickable="true"
             app:srcCompat="@drawable/barcode" />
+
+        <ImageView
+            android:id="@+id/clearBasket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="86dp"
+            android:layout_marginEnd="11dp"
+            app:srcCompat="@android:drawable/btn_dialog" />
         <!--android:onClick="getProd"-->
     </RelativeLayout>
 

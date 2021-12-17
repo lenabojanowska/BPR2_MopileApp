@@ -12,6 +12,6 @@ import retrofit2.http.Path;
 
 public interface SoldProductsApi {
 
-    @POST("api/soldProducts/{store}/{productId}/{time}/{quantity}")
-    Call<ProductModel> postPurchasedProducts(@Path("store") String storeName, @Path("productId") long productId, @Path("time") String date, @Path("quantity") int quantity);
+    @POST("api/SoldProducts/{store}/{productId}/{quantity}")
+    Call<SoldProductsModel> postPurchasedProducts(@Path("store") String storeName, @Path("productId") long productId, @Path("quantity") int quantity);
 }

@@ -100,33 +100,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         void onProductClick(int position);
     }
 
-   /* private Filter filter = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-            List<ProductModel> productModels = new ArrayList<>();
 
-            if (constraint == null || constraint.length() == 0) {
-                productModels.addAll(productListFull);
-            } else {
-                String filterPattern = constraint.toString().toLowerCase().trim();
-
-                for (ProductModel product : productListFull) {
-                    if (product.getName().toLowerCase().contains(filterPattern)) {
-                        productModels.add(product);
-                    }
-                }
-            }
-            FilterResults results = new FilterResults();
-            results.values = productModels;
-            return results;
-        }
-
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-            allProductList.clear();
-            allProductList.addAll((List)results.values);
-            notifyDataSetChanged();
-        }*/
 
 
 }

@@ -1,5 +1,7 @@
 package com.example.mobileapp.repositories;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -20,8 +22,6 @@ public class SoldProductsRepository {
 
     private static SoldProductsRepository instance;
 
-    private final MutableLiveData<SoldProductsModel> mSoldProduct;
-
     public static SoldProductsRepository getInstance(){
         if(instance == null) {
             instance = new SoldProductsRepository();
@@ -29,28 +29,19 @@ public class SoldProductsRepository {
         return instance;
     }
 
-    public SoldProductsRepository() {
-        mSoldProduct = new MutableLiveData<>();
-    }
-
-    public LiveData<SoldProductsModel> soldProducts(){
-        return mSoldProduct;
-    }
-
     public void postSoldProducts(String storeName, long pId, int quantity){
-        /*SoldProductsApi soldProductsApi = ServiceGenerator.getSoldProductsApi();
-        Call<ProductModel> call = soldProductsApi.postPurchasedProducts(storeName, pId, quantity);
-        call.enqueue(new Callback<ProductModel>() {
+        SoldProductsApi soldProductsApi = ServiceGenerator.getSoldProductsApi();
+        Call<SoldProductsModel> call = soldProductsApi.postPurchasedProducts(storeName, pId, quantity);
+        call.enqueue(new Callback<SoldProductsModel>() {
             @Override
-            public void onResponse(Call<ProductModel> call, Response<ProductModel> response) {
-                //mSoldProduct.setValue(response.body().getId());
+            public void onResponse(Call<SoldProductsModel> call, Response<SoldProductsModel> response) {
+                Log.v("Tag", "Post sold product");
             }
-
             @Override
-            public void onFailure(Call<ProductModel> call, Throwable t) {
-
+            public void onFailure(Call<SoldProductsModel> call, Throwable t) {
+                Log.v("Tag", "Failing post sold product" + t.toString());
             }
-        });*/
+        });
 
     }
 }

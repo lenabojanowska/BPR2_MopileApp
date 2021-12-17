@@ -129,8 +129,7 @@ public class ProductActivity extends AppCompatActivity {
         double price = intent.getDoubleExtra("price", 0);
         long id = intent.getLongExtra("pId",0);
 
-       /* Intent intent = getIntent();
-        long id = intent.getLongExtra("pId",0);*/
+
 
         WishlistFragment wishlistFragment = new WishlistFragment();
         Bundle bundle = new Bundle();

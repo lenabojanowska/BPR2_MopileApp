@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,6 +22,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,9 +42,11 @@ import com.example.mobileapp.connection.apis.SoldProductsApi;
 import com.example.mobileapp.fragments.store.StoreFragment;
 import com.example.mobileapp.fragments.wishlist.WishlistFragment;
 import com.example.mobileapp.models.ProductModel;
+import com.example.mobileapp.models.SoldProductsModel;
 import com.example.mobileapp.repositories.SoldProductsRepository;
 import com.example.mobileapp.viewmodels.BasketViewModel;
 import com.example.mobileapp.viewmodels.ProductViewModel;
+import com.example.mobileapp.viewmodels.SoldProductsViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -61,13 +65,11 @@ public class BasketActivity extends AppCompatActivity {
     private Button scanButton;
     BottomNavigationView bottomNavigationView;
 
-    private Button buyButton, storeButton;
-    private RecyclerView basketRecyclerView;
-    private TextView totalPriceTextView, storeTextView;
-    private FloatingActionButton floatingActionButton;
+    private Button buyButton;
 
-    private ProductViewModel productViewModel;
-    private ProductModel product;
+    private Button storeButton;
+    private TextView storeTextView;
+    private FloatingActionButton floatingActionButton;
 
     private BasketViewModel basketViewModel;
 
@@ -80,9 +82,14 @@ public class BasketActivity extends AppCompatActivity {
 
     private TextView textView, price;
 
-    private long ids;
+    private ImageView clearBasketButton;
 
-    private SoldProductsRepository soldProductsRepository;
+    private long id;
+    private ArrayList<Long> ids;
+
+    private  int quantity = 1;
+
+    private SoldProductsViewModel soldProductsViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +102,7 @@ public class BasketActivity extends AppCompatActivity {
         price = findViewById(R.id.price);
         storeButton = findViewById(R.id.searchStore);
         storeTextView = findViewById(R.id.basketStoreName);
+        clearBasketButton = findViewById(R.id.clearBasket);
 
         storeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,6 +142,7 @@ public class BasketActivity extends AppCompatActivity {
                     adapter.setProductList(productList);
 
 
+
                     Log.v("Tag", "onChanged");
                     Log.v("Tag", "product list" + productList.toString());
                 }
@@ -143,17 +152,6 @@ public class BasketActivity extends AppCompatActivity {
         insertRegisteredProduct();
 
         Log.v("Tag", "save to sqlite product " + name);
-
-        /*productViewModel = new ViewModelProvider(this).get(ProductViewModel.class);
-        productViewModel.getProductById().observe(this, new Observer<ProductModel>() {
-            @Override
-            public void onChanged(ProductModel productModel) {
-                if (productModel != null) {
-                    product = productModel;
-                    Log.v("tag", "product name " + product.getName());
-                }
-            }
-        });*/
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,84 +165,29 @@ public class BasketActivity extends AppCompatActivity {
         buyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(storeName == null){
+                if (storeName == null) {
                     storeAlert(v);
-                }else {
-                    //basketViewModel.deleteAllProducts();
-
-                    SQLiteDatabase simpleDB = getApplicationContext().openOrCreateDatabase("basket_database", Context.MODE_PRIVATE, null);
-                    Cursor cursor = simpleDB.rawQuery("select * from product_table", null);
-                    if (cursor.getCount() == 0) {
-                        return;
-                    }
-
-                    StringBuffer buffer = new StringBuffer();
-                    while (cursor.moveToNext()) {
-                        buffer.append(cursor.getLong(1));
-
-                        //long[] list = cursor.getLong(1);
-            /*buffer.append("barcode" + cursor.getLong(2));
-            buffer.append("name" + cursor.getString(3));
-            buffer.append("cat" + cursor.getString(4));
-            buffer.append("price" + cursor.getLong(5));
-            buffer.append("brand" + cursor.getString(6));*/
-
-
-                       // ids = Long.parseLong(buffer.toString());
-
-
-                        Log.v("Tag", "Data to post" + storeName + Long.parseLong(buffer.toString()) + currentDateandTime);
-
-                        }
-                    long id = 1;
-                    String store = "Rema";
-                    int quan = 1;
-
-                   /* SoldProductsApi soldProductsApi = ServiceGenerator.getSoldProductsApi();
-                    Call<ProductModel> call = soldProductsApi.postPurchasedProducts(storeName,id,quan);
-                    call.enqueue(new Callback<ProductModel>() {
-                        @Override
-                        public void onResponse(Call<ProductModel> call, Response<ProductModel> response) {
-                            //mSoldProduct.setValue(response.body().getId());
-                        }
-
-                        @Override
-                        public void onFailure(Call<ProductModel> call, Throwable t) {
-
-                        }
-                    });*/
-
-                    //soldProductsRepository.postSoldProducts("storeName", 1,1);
-
-                    }
+                } else {
+                    getRegisteredProductData();
+                    soldProductsViewModel.postSoldProducts(storeName, id, quantity);
+                    basketViewModel.deleteAllProducts();
                 }
+            }
 
+
+
+                                         });
+        clearBasketButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // soldProductsRepository.postSoldProducts("Bilka",1, 1);
+                //soldProductsRepository.postSoldProducts("Rema 1000", 1, 1);
+                //basketViewModel.deleteAllProducts();
+            }
         });
 
 
-        /*Intent intent = getIntent();
-        double totalPrice = intent.getDoubleExtra("totalPrice", 0);
-        totalPriceTextView.setText(String.valueOf(totalPrice));
-*/
 
-                /*ProductApi productApi = ServiceGenerator.getProductApi();
-                Call<List<ProductModel>> call = productApi.getProductById(1);
-                call.enqueue(new Callback<List<ProductModel>>() {
-                    @Override
-                    public void onResponse(Call<List<ProductModel>> call, Response<List<ProductModel>> response) {
-                        if(response.isSuccessful()){
-
-                            Log.v("Tag", "Successful " + response.errorBody());
-                        }else{
-                            Log.v("Tag", "Errorsaasxasas " + response.errorBody());
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<ProductModel>> call, Throwable t) {
-                        Log.v("Tag", t.toString() + "Errorsaasxasas " );
-                    }
-                });*/
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override
@@ -297,37 +240,6 @@ public class BasketActivity extends AppCompatActivity {
             }
         });
 
-        /*scanButton = findViewById(R.id.scanButton);
-        scanButton.setOnClickListener(view -> {
-            Intent intent = new Intent(this, ScanActivity.class);
-            startActivity(intent);
-        });*/
-
-
-    /*private void openScanActivity() {
-        startActivity(new Intent(getApplicationContext(), ScanActivity.class));
-    }
-
-    public void getProd(View view){
-        Toast.makeText(BasketActivity.this, "onChanged", Toast.LENGTH_LONG).show();
-
-        productViewModel = new ViewModelProvider(this).get(ProductViewModel.class);
-        productViewModel.getProductById().observe(this, new Observer<ProductModel>() {
-            @Override
-            public void onChanged(ProductModel productModel) {
-                if(productModel != null) {
-                    product = productModel;
-                    name = product.getName();
-
-
-                }
-            }
-        });
-        Log.v("Tag", ""+name);
-
-        productViewModel.getProductById(1);*/
-
-
     }
 
 
@@ -348,12 +260,9 @@ public class BasketActivity extends AppCompatActivity {
             basketViewModel.insertProduct(productModel);
         }
 
-        //Log.v("Tag", "save to sqlite product " + name);
     }
 
-    /*public void postPurchasedProducts(){
-        soldProductsRepository.postSoldProducts(storeName, bar, );
-    }*/
+
 
     public void storeAlert(View view){
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -370,30 +279,23 @@ public class BasketActivity extends AppCompatActivity {
         alert.create().show();
     }
 
-    public void getData(){
+    public void getRegisteredProductData() {
         SQLiteDatabase simpleDB = getApplicationContext().openOrCreateDatabase("basket_database", Context.MODE_PRIVATE, null);
         Cursor cursor = simpleDB.rawQuery("select * from product_table", null);
-        if(cursor.getCount() == 0){
+        if (cursor.getCount() >= 1) {
             return;
         }
+            while(cursor.moveToNext()) {
+                id = cursor.getLong(1);
+                ids = new ArrayList<Long>();
+                ids.add(id);
 
-        StringBuffer buffer = new StringBuffer();
-        while(cursor.moveToNext()){
-            buffer.append(cursor.getLong(1));
-            /*buffer.append("barcode" + cursor.getLong(2));
-            buffer.append("name" + cursor.getString(3));
-            buffer.append("cat" + cursor.getString(4));
-            buffer.append("price" + cursor.getLong(5));
-            buffer.append("brand" + cursor.getString(6));*/
+                Log.v("Tag", "list ids " + id);
 
-
-            ids = Long.parseLong(buffer.toString());
-
+            }
         }
-        Toast.makeText(getApplicationContext(), "All recods:" + buffer.toString(), Toast.LENGTH_LONG).show();
-
     }
 
 
-}
+
 

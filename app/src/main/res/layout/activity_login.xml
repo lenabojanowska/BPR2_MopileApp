@@ -8,13 +8,14 @@
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/signInButton"
-        android:layout_width="214dp"
-        android:layout_height="100dp"
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="104dp"
-        android:layout_marginBottom="316dp" />
-
+        android:layout_marginStart="79dp"
+        android:layout_marginEnd="76dp"
+        android:layout_marginBottom="169dp" />
 
 
 </RelativeLayout>

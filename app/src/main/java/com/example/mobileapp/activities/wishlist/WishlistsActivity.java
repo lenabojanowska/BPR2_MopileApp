@@ -267,22 +267,4 @@ public class WishlistsActivity extends AppCompatActivity implements WishlistAdap
     }
 
 
-
-    /*private void checkUser() {
-        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-        if(firebaseUser == null){
-            startActivity(new Intent(this, WishlistActivity.class));
-            finish();
-            Log.d(TAG, "no firebase user on Wishlist Activity") ;
-        }else{
-            String email = firebaseUser.getProviderId();
-            String id = firebaseUser.getUid();
-            Log.d(TAG, "id provider on Main Activity " + email);
-            Log.d(TAG, "uid on Main Activity " + id);
-
-            wishlistViewModel.GetProductListByCategory(id);
-
-            //binding.emailTextView.setText(email);
-        }
-    }*/
 }

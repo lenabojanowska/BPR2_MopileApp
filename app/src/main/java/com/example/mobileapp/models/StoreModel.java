@@ -18,17 +18,6 @@ public class StoreModel implements Serializable {
         this.name = name;
     }
 
-    /* public StoreModel(){
-
-        }
-
-        public StoreModel(long id, String name, String address, String town) {
-            this.id = id;
-            this.name = name;
-            this.address = address;
-            this.town = town;
-        }
-    */
     public long getId() {
         return id;
     }

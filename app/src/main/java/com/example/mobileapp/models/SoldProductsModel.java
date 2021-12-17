@@ -6,11 +6,11 @@ public class SoldProductsModel {
 
     private long id;
     private long productId;
-    private SimpleDateFormat date;
+    private String date;
     private int Quantity;
     private String storeName;
 
-    public SoldProductsModel(long id, long productId, SimpleDateFormat date, int quantity, String storeName) {
+    public SoldProductsModel(long id, long productId, String date, int quantity, String storeName) {
         this.id = id;
         this.productId = productId;
         this.date = date;
@@ -34,11 +34,11 @@ public class SoldProductsModel {
         this.productId = productId;
     }
 
-    public SimpleDateFormat getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(SimpleDateFormat date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

@@ -95,20 +95,6 @@ public class ReviewRepository {
        });
     }
 
-/*    ProductApi productApi = ServiceGenerator.getProductApi();
-    ProductModel productModel = new ProductModel(wId, wBarcode, wName, wCat, wPrice, wBrand);
-    Call<ProductModel> call = productApi.postProductOnWishlist(id, wId, productModel);
 
-        call.enqueue(new Callback<ProductModel>() {
-        @Override
-        public void onResponse(Call<ProductModel> call, Response<ProductModel> response) {
-            Log.v("Tag", "Product added " + response.body().getName());
-        }
-
-        @Override
-        public void onFailure(Call<ProductModel> call, Throwable t) {
-            Log.v("Tag", "Error adding "+ t.toString());
-        }
-    });*/
 
 }
